@@ -26,26 +26,27 @@ found in the LICENSE file. -->
 
 
       <link rel="stylesheet" href="styles.css">
+      <link rel="stylesheet" href="gStyle.css">
       <script src="media-gallery.js"></script>
       <script src="main.js"></script>
 
     </head>
     <body>
       <double-drawer-panel leftWidth="150px" rightWidth="300px">
-        <section class="ddrawer-left background3">
+        <section class="ddrawer-left background3 offColor">
           <button id="mButton">Add Marker</button>
 
           <paper-button>test test</paper-button>
 
-          <input type="number" id="mTime"></input>
-          <input type="text" id="mName"></input>
+          <input type="number" id="mTime" style="width: 100%"></input>
+          <input type="text" id="mName" style="width: 100%"></input>
           <h1>Media Gallery Explorer</h1>
           <save-text value="hej"></save-text>
           <num-pad id="numpad"></num-pad>
           <select-button>superSelect</select-button>
-          <toggle-button>superToggle</toggle-button>
+          <toggle-button selected>superToggle</toggle-button>
         </section>
-        <section class="ddrawer-main background">
+        <section class="ddrawer-main background mainColor">
 
 
 
@@ -61,7 +62,7 @@ found in the LICENSE file. -->
 
 
         </section>
-        <section class="ddrawer-right background1">
+        <section class="ddrawer-right background1 offColor">
 
 
 

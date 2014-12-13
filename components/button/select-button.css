@@ -22,14 +22,6 @@
 
 }
 
-
-.selected{
-  background-color: pink;
-}
-.selectedToggle{
-  background-color: blue;
-}
-
 paper-button{
   width: 100%;
   padding: 0;

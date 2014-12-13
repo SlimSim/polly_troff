@@ -10,11 +10,11 @@ Polymer("toggle-button", {
     if(this.selected){
       this.shadowRoot.getElementById('butt').raised = false;
       this.selected = false;
-      this.shadowRoot.getElementById('butt').classList.remove("selectedToggle");
+      this.shadowRoot.getElementById('butt').classList.remove("selectedToggleColor");
     } else {
       this.selected = true;
       this.shadowRoot.getElementById('butt').raised = true;
-      this.shadowRoot.getElementById('butt').classList.add("selectedToggle");
+      this.shadowRoot.getElementById('butt').classList.add("selectedToggleColor");
     }
   }
 });

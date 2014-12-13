@@ -5,10 +5,10 @@ Polymer("select-button", {
   selectedChanged: function(){
     if(this.selected){
       this.shadowRoot.getElementById('butt').raised = true;
-      this.shadowRoot.getElementById('butt').classList.add("selected");
+      this.shadowRoot.getElementById('butt').classList.add("selectedColor");
     } else {
       this.shadowRoot.getElementById('butt').raised = false;
-      this.shadowRoot.getElementById('butt').classList.remove("selected");
+      this.shadowRoot.getElementById('butt').classList.remove("selectedColor");
     }
   }
 });

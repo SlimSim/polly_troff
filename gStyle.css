@@ -1,3 +1,24 @@
 .smalPaperButt{
   min-width: 42px;
 }
+
+.mainColor{
+  background-color: #3F51B5; /* indigo */
+}
+
+.offColor{
+  background-color:  #304FFE; /* indigo A700 */
+  background-color:  #8C9EFF; /* indigo A100 */
+  background-color:  #2196F3; /* blue 500 */
+  color: white;
+}
+
+.selectedColor{
+  background-color: #E040FB; /* purple A200 */
+  background-color: #D500F9; /* purple A400 */
+  color: white;
+}
+
+.selectedToggleColor{
+  background-color: #00E676; /* green A400 */
+}
