@@ -1,0 +1,105 @@
+<!-- Copyright (c) 2010 The Chromium Authors. All rights reserved.
+Use of this source code is governed by a BSD-style license that can be
+found in the LICENSE file. -->
+<html>
+    <head>
+      <title>Media Gallery API Sample</title>
+
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+      <meta name="mobile-web-app-capable" content="yes">
+      <meta name="apple-mobile-web-app-capable" content="yes">
+      <meta charset="utf-8">
+
+      <script src="bower_components/platform/platform.js"></script>
+<!--      <script src="bower_components/webcomponentsjs/webcomponents.js"></script>  -->
+      <link rel="import" href="bower_components/paper-button/paper-button.html">
+      <link rel="import" href="components/save-text.html">
+      <link rel="import" href="components/double-drawer-panel.html">
+      <link rel="import" href="components/select-butt.html">
+
+      <link rel="import" href="components/num-pad/num-pad.html">
+      <link rel="import" href="components/button/select-button.html">
+      <link rel="import" href="components/tap-tempo/tap-tempo.html">
+      <link rel="import" href="components/song-marker/song-marker.html">
+      <link rel="import" href="components/marker-list/marker-list.html">
+
+
+      <link rel="stylesheet" href="styles.css">
+      <script src="media-gallery.js"></script>
+      <script src="main.js"></script>
+
+    </head>
+    <body>
+      <double-drawer-panel leftWidth="150px" rightWidth="300px">
+        <section class="ddrawer-left background3">
+          <button id="mButton">Add Marker</button>
+
+          <paper-button>test test</paper-button>
+
+          <input type="number" id="mTime"></input>
+          <input type="text" id="mName"></input>
+          <h1>Media Gallery Explorer</h1>
+          <save-text value="hej"></save-text>
+          <num-pad id="numpad"></num-pad>
+          <select-button>superSelect</select-button>
+          <toggle-button>superToggle</toggle-button>
+        </section>
+        <section class="ddrawer-main background">
+
+
+
+
+<!--          <select-butt id="test">test sel butt</select-butt>
+-->
+  <marker-list id="markerList" class="testmode">
+  </marker-list>
+
+
+
+
+
+
+        </section>
+        <section class="ddrawer-right background1">
+
+
+
+
+              <paper-button id="configure-button" >Select folders</paper-button>
+<!--              <paper-button id="configure-button" >Tempo:</paper-button>
+              <p>240</p>
+              -->
+              <tap-tempo id="taptempo" tempo="?"></tap-tempo>
+              <button id="gallery-button" style="display:none">Get Galleries Info</button>
+              <button id="add-folder-button" style="display:none">Add a Gallery...</button>
+              <button id="read-button" disabled="false" style="display:none">Read Galleries</button>
+              <button id="scan-button" style="display:none">Search for Galleries</button>
+              <button id="add-scan-results-button" style="display:none">Add Scan Results</button>
+
+              <p id="info" style="flex; display:none">
+                  <span id="status">&nbsp;</span>
+              </p>
+              <div id="list" style="display: none">
+                <select id="GalleryList" size="10" style="display: flex; width: 100%"></select>
+              </div>
+              <div id="container">
+                <div id="content"></div>
+              </div>
+              <div style="overflow:auto;">
+                <div flex id="gallery2">
+                </div>
+              </div>
+
+
+
+
+
+
+
+
+
+        </section>
+      </double-drawer-panel>
+    </body>
+</html>
