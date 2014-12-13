@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../button/select-button.html">
+
+<polymer-element name="num-pad" attributes="value special">
+  <template>
+    <LINK REL="StyleSheet" HREF="num-pad.css" TYPE="text/css" >
+    <div>
+      <select-button class="butt slim" flex on-click={{select}} value=1>1</select-button>
+      <select-button class="butt slim" flex on-click={{select}} value=2>2</select-button>
+      <select-button class="butt slim" flex on-click={{select}} value=3>3</select-button>
+    </div>
+    <div>
+      <select-button class="butt slim" flex on-click={{select}} value=4>4</select-button>
+      <select-button class="butt slim" flex on-click={{select}} value=5>5</select-button>
+      <select-button class="butt slim" flex on-click={{select}} value=6>6</select-button>
+
+    </div>
+    <div>
+      <select-button class="butt slim" flex on-click={{select}} value=7>7</select-button>
+      <select-button class="butt slim" flex on-click={{select}} value=8>8</select-button>
+      <select-button class="butt slim" flex on-click={{select}} value=9>9</select-button>
+    </div>
+    <div>
+      <span class="butt"></span>
+      <select-button class="butt slim" flex on-click={{select}} value=0>{{special}}</select-button>
+      <span class="butt"></span>
+    </div>
+  </template>
+
+  <script src="num-pad.js"></script>
+
+</polymer-element>

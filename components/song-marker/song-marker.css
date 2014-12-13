@@ -1,0 +1,22 @@
+:host {
+  display: inline-block;
+  background-color: lightgreen;
+  margin-top: {{mTop}}px;
+}
+
+::content > paper-dialog {
+  display: block;
+}
+
+:hots > paper-input{
+  display: block;
+}
+:hots > paper-button{
+  display: block;
+}
+:host > .flex{
+  display: flex;
+}
+:host > .expand{
+  flex: 1;
+}
