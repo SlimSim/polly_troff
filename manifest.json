@@ -1,0 +1,19 @@
+{
+  "manifest_version": 2,
+  "name": "Troff_restart",
+  "description": "",
+  "version": "0.0.1",
+  "minimum_chrome_version": "23",
+  "permissions": [
+	    {"mediaGalleries": ["read", "allAutoDetected"]},
+	    "storage"],
+  "icons": {
+    "16": "assets/icon_16.png",
+    "128": "assets/icon_128.png"
+  },
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  }
+}
