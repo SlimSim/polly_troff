@@ -39,10 +39,10 @@ window.onload = function(){
 
 
 
-    console.clear();
+  //  console.clear();
 
-    ml.appendChild(markerTerty);
-    ml.appendChild(markerAT);
+//    ml.appendChild(markerTerty);
+//    ml.appendChild(markerAT);
 
   }, 1000);
 

@@ -168,3 +168,32 @@ marker-list{
   height: 60vh;
   margin: 10px;
 }
+
+
+
+/*To change the slider progress bar color: */
+
+    my-slider::shadow #sliderBar::shadow #activeProgress {
+      background-color: #0f9d58;
+      background-color: yellow;
+    }
+/*
+  To change the slider knob color:
+*/
+    my-slider::shadow #sliderKnobInner {
+      background-color: #0f9d58;
+      background-color: blue;
+    }
+/*
+  To change the slider pin color:
+*/
+    paper-slider::shadow #sliderKnobInner::before {
+      background-color: #0f9d58;
+      background-color: pink;
+    }
+/*
+To change the slider secondary progress bar color:
+*/
+    my-slider::shadow #sliderBar::shadow #secondaryProgress {
+      background-color: #0f9d58;
+    }

@@ -1,8 +1,9 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="../bower_components/paper-button/paper-button.html">
 <link rel="import" href="../bower_components/paper-input/paper-input.html">
-<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
-<link rel="import" href="../bower_components/paper-slider/paper-fab.html">
+
+
+<link rel="import" href="../my-slider/my-slider.html">
 
 <polymer-element name="marker-list" attributes="
   id
@@ -11,7 +12,10 @@
     <LINK REL="StyleSheet" HREF="marker-list.css" TYPE="text/css" >
     <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
 
+
     <div class="wrapper ">
+      <my-slider rotated="30"></my-slider>
+      hej hej
       <content id=content></content>
     </div>
   </template>
