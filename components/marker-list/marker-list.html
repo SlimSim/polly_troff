@@ -13,11 +13,22 @@
     <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
 
 
-    <div class="wrapper ">
-      <my-slider rotated="30"></my-slider>
-      hej hej
+
+      <div id="activePlayRegion"></div>
+      <div id="timeBarDiv">
+<!--    <my-slider id="timeBar" min="0" max="42" value="0"></my-slider> -->
+    <input id="timeBar" type="range" min="0" max="42" value="0"/>
+      </div>
+      <div id="markerList" >
+        <content id=content></content>
+      </div>
+
+
+<!-- gammla:
+    <div id=markers>
       <content id=content></content>
     </div>
+-->
   </template>
 
   <script src="marker-list.js"></script>

@@ -1,10 +1,33 @@
 :host {
   display: block;
 /*  background-color: yellow; */
+  height: 90vh;
+  background-color: yellow;
+
+  display: flex;
+  flex-direction: row;
+
+
+/* #markerSection{ */
+/*    background-color: #7792ad; */
+    display: flex;
+    padding: 0 5px 0 0;
+    min-width: 100px;
+/*    width: 300px;
+    position: fixed;
+    top: 100px;
+    right: 320px;
+*/
+/*}*/
+
 
 }
 body{
 
+}
+
+.vSlider{
+  transform: rotate(90deg);
 }
 
 h1{
@@ -16,4 +39,85 @@ h1{
 }
 content{
 
+}
+
+
+#markerList{
+  display: flex;
+  flex-direction: column;
+}
+
+/* the style for the time ***************************************/
+#activePlayRegion{
+  width: 21px;
+  background-color: purple;
+  position: relative;
+  margin-right: -21px;
+  margin-top: 16px;
+  height: calc(100% - 32px);
+
+}
+#timeBar{
+  -webkit-appearance: slider-vertical;
+  -moz-appearance: slider-vertical;
+  appearance: slider-vertical;
+  height: calc(100% - 20px);
+  margin: 10px 0;
+  /*
+      first margin component needs to be
+      half of second height component.
+  */
+  width: 15px;
+  -webkit-transform: rotate(180deg);
+  transform: rotate(180deg);
+
+
+
+
+
+
+
+}
+
+#timeBarDiv{
+    width: 20px;
+    margin-right: 4px;
+    margin-left: 3px;
+/*  background-color: red; */
+}
+
+
+
+
+
+
+
+
+
+
+/*To change the slider progress bar color: */
+
+my-slider::shadow #sliderBar::shadow #activeProgress {
+  background-color: #0f9d58;
+  background-color: yellow;
+}
+/*
+To change the slider knob color:
+*/
+my-slider::shadow #sliderKnobInner {
+  background-color: #0f9d58;
+  background-color: blue;
+}
+/*
+To change the slider pin color:
+*/
+paper-slider::shadow #sliderKnobInner::before {
+  background-color: #0f9d58;
+  background-color: pink;
+}
+/*
+To change the slider secondary progress bar color:
+*/
+my-slider::shadow #sliderBar::shadow #secondaryProgress {
+  background-color: #0f9d58;
 }

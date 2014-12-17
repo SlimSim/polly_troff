@@ -16,7 +16,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
-  transform: rotate({{rotated}}deg);
+  transform: ro tate({{rotated}}deg);
 }
 
 :host(:focus) {

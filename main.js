@@ -32,7 +32,7 @@ window.onload = function(){
     var markerTerty = document.createElement('song-marker');
     markerTerty.name = "terty";
     markerTerty.time = 30;
-    markerTerty.textContent = "super duper dunder kul som dansarna ska visa upp";
+    markerTerty.textContent = "super";
     var markerAT = document.createElement('song-marker');
     markerAT.name = "AT fyra"
     markerAT.time = 84
@@ -41,8 +41,8 @@ window.onload = function(){
 
   //  console.clear();
 
-//    ml.appendChild(markerTerty);
-//    ml.appendChild(markerAT);
+    ml.appendChild(markerTerty);
+    ml.appendChild(markerAT);
 
   }, 1000);
 
