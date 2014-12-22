@@ -13,8 +13,14 @@ body {
 section {
   /*margin: 20px;*/
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 42px);
 }
+@media screen and (min-width: 700px){
+  section {
+    height: 100vh;
+  }
+}
+
 
 a, a:hover {
   text-decoration: none;
@@ -43,12 +49,15 @@ paper-checkbox {
   margin-left: 1em;
 }
 
+
 paper-fab {
-  position: absolute !important;
-  top: 35px;
-  right: 1em;
   z-index: 1;
 }
+
+
+
+
+
 
 paper-tabs {
   background-color: #5677fc;
@@ -161,7 +170,7 @@ video{
 
 
 marker-list{
-  height: 100vh;
+  height: 100%;
 }
 
 .testmode{
@@ -169,6 +178,25 @@ marker-list{
   margin: 10px;
 }
 
+.oneIcon{
+  width: 42px;
+}
 
+.bottomMenue{
+  height: 42px;
+  display: flex;
+  align-items: center;
+}
+
+.bottom{
+  position: absolute;
+  bottom: 0;
+}
+.left{
+  left: 0;
+}
+.right{
+  right: 0;
+}
 
 

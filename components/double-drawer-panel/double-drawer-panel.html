@@ -12,11 +12,11 @@
   <template>
     <LINK REL="StyleSheet" HREF="double-drawer-panel.css" TYPE="text/css" >
 
-    <core-drawer-panel rightdrawer responsiveWidth="1000px" drawerWidth="{{rightWidth}}">
+    <core-drawer-panel id="right" rightdrawer responsiveWidth="{{rightResponsiveWidth}}" drawerWidth="{{rightWidth}}">
       <section drawer>
           <content select=".ddrawer-right"></content>
       </section>
-      <core-drawer-panel main responsiveWidth="700px" drawerWidth="{{leftWidth}}">
+      <core-drawer-panel id="left" main responsiveWidth="{{leftResponsiveWidth}}" drawerWidth="{{leftWidth}}">
         <section drawer>
           <content select=".ddrawer-left"></content>
         </section>
@@ -25,6 +25,7 @@
         </section>
       </core-drawer-panel>
     </core-drawer-panel>
+    <content></content>
   </template>
 
 

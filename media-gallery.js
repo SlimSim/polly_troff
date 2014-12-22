@@ -11,6 +11,16 @@ var vidFormats = ['3gp', '3gpp', 'avi', 'flv', 'mov', 'mpeg', 'mpeg4', 'mp4', 'o
 
 var gCurrentSongPath = "";
 
+function recallAllPolymers(){
+  document.getElementById('markerList').recall();
+  document.getElementById('numpad').recall();
+  document.getElementById('taptempo').recall();
+}
+function setSongMetadata(media){
+  console.log("setSongMetadata ->")
+  document.getElementById('markerList').setSongMetadata(media);
+}
+
 function errorPrintFactory(custom) {
    return function(e) {
       var msg = '';
@@ -59,6 +69,11 @@ function addAudioToContentDiv() {
    var content_div = document.getElementById('content');
    var audio = document.createElement('audio');
    audio.setAttribute("controls","controls");
+   console.log("addAudioToContentDiv ->")
+   audio.addEventListener('loadedmetadata', function(e){
+     console.log("-> setSongMetadata")
+     setSongMetadata(audio);
+   })
    content_div.appendChild(audio);
    return audio;
 }
@@ -67,6 +82,11 @@ function addVideoToContentDiv() {
    var content_div = document.getElementById('content');
    var audio = document.createElement('video');
    audio.setAttribute("controls","controls");
+   audio.addEventListener('loadedmetadata', function(e){
+     console.log("-> setSongMetadata")
+     setSongMetadata(audio);
+   })
+
    content_div.appendChild(audio);
    return audio;
 }
@@ -100,7 +120,7 @@ function setSong(fullPath, galleryId){
   var fsId = galleryId;
   var fs = null;
 
-     // get the filesystem that the selected file belongs to
+  // get the filesystem that the selected file belongs to
   for (var i=0; i < gGalleryArray.length; i++) {
     var mData = chrome.mediaGalleries.getMediaFileSystemMetadata(gGalleryArray[i]);
     if (mData.galleryId == fsId) {
@@ -109,9 +129,14 @@ function setSong(fullPath, galleryId){
     }
   }
   if (fs) {
+
+
+
       var path = fullPath;
       console.log("path: " + path);
+
       gCurrentSongPath = path;
+      recallAllPolymers();
       fs.root.getFile(path, {create: false}, function(fileEntry) {
          var newElem = null;
          // show the file data
@@ -144,9 +169,6 @@ function setSong(fullPath, galleryId){
       });
    }
 
-
-  document.getElementById('numpad').recall();
-  document.getElementById('taptempo').recall();
 
 }
 
@@ -219,7 +241,8 @@ function addItem(itemEntry) {
       var mData = chrome.mediaGalleries.getMediaFileSystemMetadata(itemEntry.filesystem);
 
 
-    var pap = document.createElement("paper-button")
+    var pap = document.createElement("select-button");
+    pap.setAttribute("style", "width: 100%");
     pap.appendChild(document.createTextNode(itemEntry.name))
     pap.setAttribute("data-fullpath", itemEntry.fullPath );
     pap.setAttribute("data-fsid", mData.galleryId );

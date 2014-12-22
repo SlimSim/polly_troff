@@ -3,16 +3,18 @@ Polymer("song-marker", {
 
     this.value = typeof this.value != 'undefined'? parseInt(this.value): 1;
     this.startValue = this.value;
+    this.mTop = this.mTop || 0;
 
 //    this.start = typeof this.start != 'undefined'? this.value: false;
 //    this.stop  = typeof this.stop  != 'undefined'? this.value: false;
 
 
     var pbok = this.shadowRoot.querySelectorAll('.closeOnPress');
-    for(var i=0; i<pbok.length; i++)
+    for(var i=0; i<pbok.length; i++){
       pbok[i].addEventListener('click',function(){
         this.parentNode.parentNode.toggle();
       })
+    }
   },
   detached: function(){
     console.log("marker detached from marker -> this:")

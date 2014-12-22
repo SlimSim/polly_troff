@@ -23,6 +23,14 @@ window.onload = function(){
     ml.appendChild(marker);
 
   })
+  document.querySelector('#addMarkerButt').addEventListener('click', function(){
+    console.log("Add Marker is clicked...")
+
+    var ml = document.getElementById('markerList');
+    ml.addMark();
+
+  })
+
 
 
   setTimeout(function(){
@@ -39,7 +47,7 @@ window.onload = function(){
 
 
 
-  //  console.clear();
+    //console.clear();
 
     ml.appendChild(markerTerty);
     ml.appendChild(markerAT);

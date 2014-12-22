@@ -6,7 +6,9 @@
   "minimum_chrome_version": "23",
   "permissions": [
 	    {"mediaGalleries": ["read", "allAutoDetected"]},
-	    "storage"],
+	    "storage",
+	    "webview"
+	],
   "icons": {
     "16": "assets/trofflogo16.png",
     "48": "assets/trofflogo48.png",

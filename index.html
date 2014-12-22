@@ -16,12 +16,25 @@ found in the LICENSE file. -->
       <link rel="import" href="bower_components/paper-button/paper-button.html">
       <link rel="import" href="components/save-text.html">
       <link rel="import" href="components/double-drawer-panel/double-drawer-panel.html">
+      <link rel="import" href="bower_components/core-icon/core-icon.html">
+      <link rel="import" href="bower_components/core-icons/core-icons.html">
+      <link rel="import" href="bower_components/core-iconset/core-iconset.html">
+      <link rel="import" href="bower_components/core-iconset-svg/core-iconset-svg.html">
 
       <link rel="import" href="components/num-pad/num-pad.html">
       <link rel="import" href="components/button/select-button.html">
       <link rel="import" href="components/tap-tempo/tap-tempo.html">
       <link rel="import" href="components/song-marker/song-marker.html">
       <link rel="import" href="components/marker-list/marker-list.html">
+      <link rel="import" href="components/onoff-value/onoff-value.html">
+
+
+      <!-- icons -->
+      <link rel="import" href="bower_components/paper-icon-button/paper-icon-button.html">
+      <link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
+      <link rel="import" href="/bower_components/core-item/core-item.html">
+      <link rel="import" href="/bower_components/core-icons/social-icons.html">
+      <link rel="import" href="/bower_components/core-icons/av-icons.html">
 
 
       <link rel="stylesheet" href="styles.css">
@@ -31,9 +44,39 @@ found in the LICENSE file. -->
 
     </head>
     <body>
-      <double-drawer-panel leftWidth="150px" rightWidth="300px">
+      <double-drawer-panel  leftWidth="200px" leftResponsiveWidth="700px"
+                            rightWidth="300px" rightResponsiveWidth="1000px">
         <section class="ddrawer-left background3 offColor">
+          <core-icon src="//www.polymer-project.org/images/icons/android.svg"></core-icon>
+
+          <core-icon src="test.svg" ></core-icon>
+
+
           <button id="mButton">Add Marker</button>
+          <paper-button class="importantColor" >Add Marker</paper-button>
+
+
+    <core-icon icon="social:cake"></core-icon>
+    <core-icon icon="av:pause"></core-icon>
+    <core-icon icon="av:play-arrow"></core-icon>
+    <core-icon icon="av:av-timer"></core-icon>
+    ? <core-icon icon="av:loop"></core-icon> ?
+    <core-icon icon="av:movie"></core-icon>
+    <core-icon icon="av:my-library-add"></core-icon>
+    <core-icon icon="av:playlist-add"></core-icon>
+    <core-icon-button icon="av:queue-music"></core-icon-button>
+    <core-icon icon="av:volume-down"></core-icon>
+    <core-icon icon="av:volume-off"></core-icon>
+    <core-icon-button icon="av:volume-mute"></core-icon-button>
+    <paper-icon-button icon="av:volume-up"></paper-icon-button>
+    <core-icon icon="av:volume"></core-icon>
+    <core-icon icon="polymer"></core-icon>
+<br />
+<core-icon-button icon="menu"></core-icon-button>
+
+          <onoff-value value=3><core-icon icon="av:av-timer"></core-icon><!--pause bef start--></onoff-value>
+          <onoff-value value=4>start before</onoff-value>
+          <onoff-value value=2>stop after</onoff-value>
 
           <paper-button>test test</paper-button>
 
@@ -45,13 +88,25 @@ found in the LICENSE file. -->
           <select-button>superSelect</select-button>
           <toggle-button selected>superToggle</toggle-button>
         </section>
-        <section class="ddrawer-main background mainColor">
+        <section class="ddrawer-main background mainColor flexCol">
 
 
 
 
-  <marker-list id="markerList" class="testmode">
-  </marker-list>
+          <marker-list id="markerList" class="t estmode">
+          </marker-list>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -98,6 +153,56 @@ found in the LICENSE file. -->
 
 
         </section>
+
+
+
+        <div id="bottomMenueLeft" class="bottom left flexRow bottomMenue">
+          <paper-icon-button class="leftMenueToggle" icon="more-vert" style="margin-right: -6px;"></paper-icon-button>
+          <paper-button id="addMarkerButt" class="importantColor iconPaperButton" style="margin-left: 15px"><core-icon icon="add"></core-icon>Add marker</paper-button>
+          <paper-fab class="importantColor" icon="av:play-arrow" mini></paper-fab>
+        </div>
+        <div id="bottomMenueRight" class="bottom right oneIcon flexRow bottomMenue rightMenueToggle">
+          <paper-icon-button icon="menu"></paper-icon-button>
+        </div>
+
       </double-drawer-panel>
+
+
+
+
+<!--
+jag tänker att jag ska ha denna bottomMenue löst flytande längs hela botten
+när brädden blir mindre än 1000px så kommer höger hambörjemeny fram.
+när brädden blir mindre än 700px så minskar marker-listen med 42px,
+och vänster punk-hambörjemeny kommer fram...
+
+
+något sådant?
+ - så hela bottomMenue ska ligga utanför double-drawer-grejjen
+   med "position: absolute !important;"
+   (man måste dock kunna trycka på saker även om dom ligger bakom osynliga knappar...
+-->
+
+
+<!--
+<core-icon-button>
+<core-item icon="av:play-arrow" label="Play"></core-item>
+</core-icon-button>
+<core-menu-button icon="menu">
+  <core-item icon="settings" label="Settings"></core-item>
+</core-menu-button>
+<paper-button>q
+  <core-item icon="add" label="Marker"></core-item>
+</paper-button>
+-->
+<!--
+<paper-icon-button icon="add" label="add"></paper-icon-button>
+<paper-icon-button icon="add-box">add</paper-icon-button>
+-->
+
+
+
+
+
     </body>
 </html>

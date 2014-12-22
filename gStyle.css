@@ -22,3 +22,27 @@
 .selectedToggleColor{
   background-color: #00E676; /* green A400 */
 }
+
+.importantColor{
+  background-color: #FF9100; /* Orange A400 */
+}
+
+.commonButtWidth{
+  width: 100px;
+}
+
+
+.flexCol{
+  display: flex;
+  flex-direction: column;
+}
+
+.flexRow{
+  display: flex;
+  flex-direction: row;
+}
+
+.iconPaperButton{
+  height: 32px;
+  display: flex;
+}

@@ -2,6 +2,11 @@
   display: inline-block;
   background-color: #82B1FF;
   margin-top: {{mTop}}px;
+  height: 33px;
+  /* the "height" must be set here,
+   * otherwise aMarker[i].clientHeight will return a totaly wrong value
+   * (the original height, as of 2014-12-18, was 33px)
+   */
 }
 
 ::content > paper-dialog {

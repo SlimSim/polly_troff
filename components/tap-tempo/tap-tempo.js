@@ -3,9 +3,22 @@ Polymer("tap-tempo", {
   previousTime: 0,
   time: 0,
   startTime: 0,
+  tempo: "?",
   ready: function(){
     console.log("tapp-tempo - ready");
     var taptempo = this;
+  },
+  recall: function(){
+    console.log("recall -> gCurrentSongPath = " + gCurrentSongPath)
+    if(!gCurrentSongPath)
+      return;
+    console.log("recaling tempo of " + gCurrentSongPath)
+    var key = gCurrentSongPath + 'taptempo';
+    var thisTaptempo = this;
+    console.log(key)
+    chrome.storage.local.get(key, function(res){
+      thisTaptempo.tempo = res[key] || "?";
+    });
   },
   tempoTapped: function(){
     console.log("tempo tapped")
@@ -33,25 +46,17 @@ Polymer("tap-tempo", {
 */
   },
   tempoChanged: function(){
-
+    console.log("tempo changed")
 
     if(!gCurrentSongPath)
       return;
+    console.log("saving new tempo")
     var key = gCurrentSongPath + 'taptempo';
     var obj = {};
     obj[key] = this.tempo;
     chrome.storage.local.set(obj);
 
     console.log("tempoChanged -> saving " + this.tempo + " to " + key);
-  },
-  recall: function(){
-    if(!gCurrentSongPath)
-      return;
-    var key = gCurrentSongPath + 'taptempo';
-    var taptempo = this;
-    chrome.storage.local.get(key, function(res){
-      taptempo.tempo = res[key] || "?";
-    });
   }
 
 });

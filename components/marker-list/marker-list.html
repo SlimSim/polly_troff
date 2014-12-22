@@ -7,6 +7,10 @@
 
 <polymer-element name="marker-list" attributes="
   id
+  value
+  max
+  stopTime
+  startTime
   ">
   <template class="mainColor">
     <LINK REL="StyleSheet" HREF="marker-list.css" TYPE="text/css" >
@@ -17,11 +21,13 @@
       <div id="activePlayRegion"></div>
       <div id="timeBarDiv">
 <!--    <my-slider id="timeBar" min="0" max="42" value="0"></my-slider> -->
-    <input id="timeBar" type="range" min="0" max="42" value="0"/>
+    <input id="timeBar" type="range" min="0" max="{{max}}" value="{{value}}"/>
       </div>
       <div id="markerList" >
         <content id=content></content>
       </div>
+
+
 
 
 <!-- gammla:
@@ -29,6 +35,28 @@
       <content id=content></content>
     </div>
 -->
+
+
+
+
+
+    <paper-dialog id="addMarkerDialog" heading="Add marker">
+      <div>
+        <span>Name: </span><paper-input id="newMarkerName" value="name of marker"></paper-input>
+      </div>
+      <div>
+        <span>Time: </span><paper-input value="current Time"></paper-input>
+      </div>
+      <div style="display: flex">
+        <div style="flex: 1"></div>
+        <paper-button affirmative default class="closeOnPress" id="pbOK" on-click={{editOK}}>OK</paper-button>
+      </div>
+    </paper-dialog>
+
+
+
+
+
   </template>
 
   <script src="marker-list.js"></script>
