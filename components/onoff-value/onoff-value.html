@@ -1,0 +1,33 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../../bower_components/paper-slider/paper-slider.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-icon-button/paper-icon-button.html">
+
+<link rel="import" href="../button/select-button.html">
+<link rel="import" href="../button/toggle-button.html">
+
+<polymer-element name="onoff-value" attributes="
+  value
+  disabled
+  active">
+  <template>
+    <LINK REL="StyleSheet" HREF="onoff-value.css" TYPE="text/css" >
+    <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
+
+
+
+    <toggle-button class="commonButtWidth" id="startButt" selected={{active}}>
+      <content></content>
+    </toggle-button>
+    <core-icon-button on-click={{supValue}} icon="remove"></core-icon-button>
+    <core-icon-button on-click={{addValue}} icon="add"></core-icon-button>
+    <paper-input value="{{value}}" disabled="{{disabled}}"></paper-input>
+
+  </template>
+
+  <script src="onoff-value.js"></script>
+
+</polymer-element>
