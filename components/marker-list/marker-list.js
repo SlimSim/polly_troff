@@ -6,9 +6,6 @@ Polymer("marker-list", {
   ready: function(){
     this.addEventListener('markerDetached', this.markerDetached);
     this.addEventListener('markerAttached', this.markerAttached);
-    console.log("Height client = " + this.clientHeight );
-    console.log("Height inner  = " + this.innerHeight  );
-    console.log("Height offset = " + this.offsetHeight );
 
     this.addEventListener('setStart', this.setStart);
     this.addEventListener('setStop', this.setStop);
@@ -23,11 +20,9 @@ Polymer("marker-list", {
     var pbok = this.shadowRoot.querySelectorAll('.closeOnPress');
     for(var i=0; i<pbok.length; i++){
       pbok[i].addEventListener('click',function(){
-        console.log(thisMarkerList.shadowRoot.querySelector('#newMarkerName'))
+
 
         this.parentNode.parentNode.toggle();
-        console.log(this.parentNode.parentNode)
-        console.log(thisMarkerList);
 
 /*
         var markerTerty = document.createElement('song-marker');
@@ -46,11 +41,16 @@ Polymer("marker-list", {
 
   },
   recall: function(){
-
+    this.value = 0;
+    this.max = 42;
+    this.stopTime = 42;
+    this.startTime = 0;
   },
   setSongMetadata: function(media){
-    console.log("markerlist, setSongMetadata ->")
     this.max = media.duration;
+//    this.stopTime = this.value = ???
+// this.startTime = ???
+
 
     thisMarkerList = this;
     media.addEventListener('timeupdate', function(){
@@ -62,22 +62,26 @@ Polymer("marker-list", {
   },
   addMark: function(){
     var ed = this.shadowRoot.querySelector('#addMarkerDialog');
-    console.log("ed:");
-    console.log(ed)
     ed.toggle();
   },
+  editOK: function(){
+
+  },
   recalcDistanse: function(){
-    console.log("recalcDistanse ->");
+    // används denna ??? SITE SITE SITE SITE SITE SITE SITE SITE SITE SITE SITE SITE
   },
   markerDetached: function(fireObject){
-    console.log("markerDetached from list -> fireObject:");
-    console.log(fireObject.detail.currentMarker);
     fireObject.detail.currentMarker.remove()
     this.recalculateDistanse();
   },
+  maxChanged: function(){
+    document.querySelector('#timeArea').maxTime = this.max;
+  },
+  valueChanged: function(){
+    document.querySelector('audio, video').currentTime = this.value;
+    document.querySelector('#timeArea').currentTime = this.value;
+  },
   markerAttached: function(fireObject){
-    console.log("markerAttached from list ->");
-    console.log(fireObject.detail.currentMarker);
     this.recalculateDistanse();
   },
   setStart: function(fireObject){
@@ -101,10 +105,8 @@ Polymer("marker-list", {
     }
   },
   recalculateDistanse: function(){
-    console.log('\nrecalculateDistanse ->');
     var aMarker = this.querySelectorAll('song-marker');
-    console.log("aMarker")
-    console.log(aMarker);
+
 
 
 
@@ -134,33 +136,18 @@ Polymer("marker-list", {
 
 
 
-    console.log("this:")
-    console.log(this)
-    console.log("this.shadowRoot:")
-    console.log(this.shadowRoot)
-    console.log("this.shadowRoot.querySelector('#timeBar'):")
-    console.log(this.shadowRoot.querySelector('#timeBar'))
 
     var timeBarHeight = this.shadowRoot.querySelector('#timeBar').clientHeight - 10;
     var totalDistanceTop = 4;
-    console.log("timeBarHeight = " + timeBarHeight);
 
 
     var barMarginTop = parseInt(getComputedStyle(this.shadowRoot.querySelector('#timeBar')).marginTop);
-    console.log("barMarginTop = " + barMarginTop);
-
-
-
-
 
     for (var i=0; i<aMarker.length; i++){
 
             var songTime = 200;//$(FS.currentPlayer)[0].duration;
             var markerTime = aMarker[i].time; //child.childNodes[2].timeValue;
             var myRowHeight = aMarker[i].clientHeight;
-      console.log("markerTime = " + markerTime);
-      console.log("aMarker[i].clientHeight = " + aMarker[i].clientHeight)
-      console.log("myRowHeight = " + myRowHeight);
 
 
             var freeDistanceToTop = timeBarHeight * markerTime / songTime;
@@ -183,7 +170,7 @@ Polymer("marker-list", {
 */
     }
   },
-  recalculateDistanseGam: function(input){
+  recalculateDistanseGam: function(input){ /// gam  - avnänds denna ??? SITE SITE SITE SITE SITE SITE SITE SITE SITE
     console.log('recalculateDistanseGam ->');
 
 
@@ -195,11 +182,8 @@ Polymer("marker-list", {
     if(this.querySelectorAll)
       var aMarker = this.querySelectorAll('song-marker');
     else{
-      console.log("this.querySelectorAll does not exist. this:")
-      console.log(this)
+
     }
-    console.log("aMarker")
-    console.log(aMarker);
 
     var totalDistanceTop = 0;
     var barMarginTop = 0;
@@ -218,11 +202,11 @@ Polymer("marker-list", {
       totalDistanceTop = freeDistanceToTop + markerHeight + barMarginTop;
 
       aMarker[i].mTop = marginTop;
-      console.log( "markerHeight = " + markerHeight + ", markerTIme = " + markerTime);
+
 //      aMarker[i].mTop = aMarker[i].time - sumTime;
 //      sumTime = aMarker[i].time
     }
-    console.log("\n")
+
 
 /*
     while(child){
@@ -253,11 +237,5 @@ Polymer("marker-list", {
   addMarker: function(name, time){
     console.log("addMarker -> name = " + name + ", time = " + time);
 
-  },
-  printHeight: function(){
-    console.log("Height client = " + this.clientHeight );
-    console.log("Height inner  = " + this.innerHeight  );
-    console.log("Height offset = " + this.offsetHeight );
   }
-
 });

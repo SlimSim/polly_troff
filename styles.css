@@ -13,14 +13,16 @@ body {
 section {
   /*margin: 20px;*/
   width: 100%;
-  height: calc(100vh - 42px);
+  height: calc(100vh - 50px);
 }
 @media screen and (min-width: 700px){
   section {
     height: 100vh;
   }
 }
-
+.specialHeight{
+  height: calc(100vh - 50px);
+}
 
 a, a:hover {
   text-decoration: none;
@@ -68,15 +70,6 @@ paper-tabs[noink][nobar] paper-tab.core-selected {
   color: #ffff8d;
 }
 
-.background{
-  background-color: blue;
-}
-.background1{
-  background-color: darkblue;
-}
-.background3{
-  background-color: lightblue;
-}
 
 
 
@@ -178,12 +171,8 @@ marker-list{
   margin: 10px;
 }
 
-.oneIcon{
-  width: 42px;
-}
-
 .bottomMenue{
-  height: 42px;
+  height: 50px;
   display: flex;
   align-items: center;
 }
@@ -199,4 +188,7 @@ marker-list{
   right: 0;
 }
 
+.alignRight{
+  text-align: right;
+}
 

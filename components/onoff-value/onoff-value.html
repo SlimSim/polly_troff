@@ -11,20 +11,21 @@
 
 <polymer-element name="onoff-value" attributes="
   value
-  disabled
-  active">
+  isOn
+  offValue
+  dbQuery">
   <template>
     <LINK REL="StyleSheet" HREF="onoff-value.css" TYPE="text/css" >
     <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
 
 
 
-    <toggle-button class="commonButtWidth" id="startButt" selected={{active}}>
+    <toggle-button on-click={{toggleOnOff}} class="commonButtWidth" id="startButt">
       <content></content>
     </toggle-button>
-    <core-icon-button on-click={{supValue}} icon="remove"></core-icon-button>
-    <core-icon-button on-click={{addValue}} icon="add"></core-icon-button>
-    <paper-input value="{{value}}" disabled="{{disabled}}"></paper-input>
+    <paper-icon-button on-click={{supValue}} icon="remove"></paper-icon-button>
+    <paper-icon-button on-click={{addValue}} icon="add"></paper-icon-button>
+    <paper-input value="{{onValue}}"></paper-input>
 
   </template>
 

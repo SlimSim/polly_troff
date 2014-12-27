@@ -27,6 +27,8 @@ found in the LICENSE file. -->
       <link rel="import" href="components/song-marker/song-marker.html">
       <link rel="import" href="components/marker-list/marker-list.html">
       <link rel="import" href="components/onoff-value/onoff-value.html">
+      <link rel="import" href="components/time-area/time-area.html">
+      <link rel="import" href="components/v-slider-value/v-slider-value.html">
 
 
       <!-- icons -->
@@ -34,6 +36,7 @@ found in the LICENSE file. -->
       <link rel="import" href="bower_components/core-icon-button/core-icon-button.html">
       <link rel="import" href="/bower_components/core-item/core-item.html">
       <link rel="import" href="/bower_components/core-icons/social-icons.html">
+      <link rel="import" href="/bower_components/core-icons/communication-icons.html">
       <link rel="import" href="/bower_components/core-icons/av-icons.html">
 
 
@@ -46,12 +49,10 @@ found in the LICENSE file. -->
     <body>
       <double-drawer-panel  leftWidth="200px" leftResponsiveWidth="700px"
                             rightWidth="300px" rightResponsiveWidth="1000px">
-        <section class="ddrawer-left background3 offColor">
-
-          <button id="mButton">Add Marker</button>
-          <paper-button class="importantColor" >Add Marker</paper-button>
+        <section class="ddrawer-left flexCol specialHeight offColor alignRight">
 
 
+<!--
     <core-icon icon="social:cake"></core-icon>
     <core-icon icon="av:pause"></core-icon>
     <core-icon icon="av:play-arrow"></core-icon>
@@ -69,20 +70,36 @@ found in the LICENSE file. -->
     <core-icon icon="polymer"></core-icon>
 <br />
 <core-icon-button icon="menu"></core-icon-button>
+-->
+          <div class="flexRow">
+            <paper-icon-button icon="help"></paper-icon-button>
+            <paper-icon-button icon="social:share"></paper-icon-button>
+            <paper-icon-button icon="communication:import-export"></paper-icon-button>
+          </div>
+          <time-area id="timeArea"></time-area>
 
-          <onoff-value value=3><core-icon icon="av:av-timer"></core-icon><!--pause bef start--></onoff-value>
-          <onoff-value value=4>start before</onoff-value>
-          <onoff-value value=2>stop after</onoff-value>
+          <onoff-value id="pauseBefStart" value=3 isOn="true" label="pause before start" dbQuery="pauseBefStart"><core-icon icon="av:av-timer"></core-icon>before start </onoff-value>
 
-          <paper-button>test test</paper-button>
+          <h1>Marker</h1>
+          <paper-button>play full song</paper-button>
+          <onoff-value id="startBefore" isOn="true" value=4 dbQuery="startBefore">start before</onoff-value>
+          <onoff-value id="stopAfter" isOn="true" value=2 dbQuery="stopAfter">stop after</onoff-value>
 
+          <h1>Loop</h1>
+          <num-pad id="numpad" special="&infin;"></num-pad>
+          <onoff-value id="pauseBetweenLoops" value=2 offValue=1 dbQuery="pauseBetweenLoops"><core-icon icon="av:av-timer"></core-icon> between loops</onoff-value>
+
+          <div class="flexRow" style="justify-content: space-around">
+            <v-slider-value id="volumeVal" name="Volume" min=0 max=100 value=75 amount=3 updateQuery="volume" ></v-slider-value>
+            <v-slider-value id="speedVal" name="Speed" min=50 max=200 value=100 amount=3 updateQuery="playbackRate"></v-slider-value>
+          </div>
+<!--
+          <button id="mButton">Add Marker</button>
           <input type="number" id="mTime" style="width: 100%"></input>
           <input type="text" id="mName" style="width: 100%"></input>
-          <h1>Media Gallery Explorer</h1>
-          <save-text value="hej"></save-text>
-          <num-pad id="numpad"></num-pad>
           <select-button>superSelect</select-button>
           <toggle-button selected>superToggle</toggle-button>
+-->
         </section>
         <section class="ddrawer-main background mainColor flexCol">
 
@@ -155,10 +172,10 @@ found in the LICENSE file. -->
         <div id="bottomMenueLeft" class="bottom left flexRow bottomMenue">
           <paper-icon-button class="leftMenueToggle" icon="more-vert" style="margin-right: -6px;"></paper-icon-button>
           <paper-button id="addMarkerButt" class="importantColor iconPaperButton" style="margin-left: 15px"><core-icon icon="add"></core-icon>Add marker</paper-button>
-          <paper-fab class="importantColor" icon="av:play-arrow" mini></paper-fab>
+          <paper-fab id="playButton" class="importantColor" icon="av:play-arrow" mini></paper-fab>
         </div>
-        <div id="bottomMenueRight" class="bottom right oneIcon flexRow bottomMenue rightMenueToggle">
-          <paper-icon-button icon="menu"></paper-icon-button>
+        <div id="bottomMenueRight" class="bottom right flexRow bottomMenue">
+          <paper-icon-button class="rightMenueToggle" icon="menu"></paper-icon-button>
         </div>
 
       </double-drawer-panel>
@@ -195,10 +212,5 @@ något sådant?
 <paper-icon-button icon="add" label="add"></paper-icon-button>
 <paper-icon-button icon="add-box">add</paper-icon-button>
 -->
-
-
-
-
-
     </body>
 </html>

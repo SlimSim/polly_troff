@@ -5,9 +5,8 @@ toastGroupTemplate.showToast = function() {
 */
 
 window.onload = function(){
-  console.log("\nready\n\n")
+/*
   document.getElementById('mButton').addEventListener('click', function(){
-    console.log("mButton is clicked...")
 
     var ml = document.getElementById('markerList');
 
@@ -23,20 +22,39 @@ window.onload = function(){
     ml.appendChild(marker);
 
   })
+*/
   document.querySelector('#addMarkerButt').addEventListener('click', function(){
-    console.log("Add Marker is clicked...")
-
+    //console.log("Add Marker is clicked...")
     var ml = document.getElementById('markerList');
     ml.addMark();
-
   })
+  document.querySelector('#playButton').addEventListener('click', function(){
+    var media = document.querySelector('audio, video');
+    if(!media) return;
+    if(media.paused){
+      media.play();
+      this.icon = "av:pause";
+    } else {
+      media.pause();
+      document.querySelector('#playButton').icon = "av:play-arrow";
+    }
+  })
+/*  document.querySelector('#speedVal').addEventListener('valueChanged', function(){
+    var media = document.querySelector('audio, video');
+    if(!media) return;
 
+//    console.log("this:")
+//    console.log(this)
+
+//    media.playbackRate =
+  })
+*/
 
 
   setTimeout(function(){
     var ml = document.getElementById('markerList');
 
-
+/*
     var markerTerty = document.createElement('song-marker');
     markerTerty.name = "terty";
     markerTerty.time = 30;
@@ -51,7 +69,7 @@ window.onload = function(){
 
     ml.appendChild(markerTerty);
     ml.appendChild(markerAT);
-
+*/
   }, 1000);
 
 
