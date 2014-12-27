@@ -1,0 +1,27 @@
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
+<link rel="import" href="../bower_components/core-localstorage/core-localstorage.html">
+
+<polymer-element name="v-slider-value" attributes="name value min max updateQuery startValue amount">
+  <template>
+    <LINK REL="StyleSheet" HREF="v-slider-value.css" TYPE="text/css" >
+    <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
+      <paper-button on-click={{setOrgValue}}>{{name}}</paper-button>
+      <div class="flexRow">
+        <paper-icon-button on-click={{supValue}} icon="remove"></paper-icon-button>
+        {{value}}%
+        <paper-icon-button on-click={{addValue}} icon="add"></paper-icon-button>
+      </div>
+
+      <div id="rangeDiv">
+        <!--    <my-slider id="timeBar" min="0" max="42" value="0"></my-slider> -->
+        <input id="range" type="range" min="{{min}}" max="{{max}}" value="{{value}}"/>
+      </div>
+
+  </template>
+
+  <script src="v-slider-value.js"></script>
+
+</polymer-element>
+

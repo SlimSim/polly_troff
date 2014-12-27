@@ -1,0 +1,10 @@
+@media screen and (min-width: {{leftResponsiveWidth}}){
+  ::content .leftMenueToggle{
+    display: none;
+  }
+}
+@media screen and (min-width: {{rightResponsiveWidth}}){
+  ::content .rightMenueToggle{
+    display: none;
+  }
+}
