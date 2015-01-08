@@ -1,6 +1,9 @@
 :host {
   display: inline-block;
+  display: flex;
+  align-items: center;
   background-color: #82B1FF;
+  background-color: transparent;
   margin-top: {{mTop}}px;
   height: 33px;
   /* the "height" must be set here,
@@ -24,4 +27,8 @@
 }
 :host > .expand{
   flex: 1;
+}
+
+:host > .extraRoom{
+  padding: 5px;
 }

@@ -13,6 +13,11 @@
   color: white;
 }
 
+.buttOffColor{
+  background-color: gray;
+}
+
+
 .selectedColor{
   background-color: #E040FB; /* purple A200 */
   background-color: #D500F9; /* purple A400 */
@@ -27,8 +32,9 @@
   background-color: #FF9100; /* Orange A400 */
 }
 
+
 .commonButtWidth{
-  width: 100px;
+  width: 150px;
 }
 
 

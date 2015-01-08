@@ -41,14 +41,20 @@
 
     <paper-dialog id="addMarkerDialog" heading="Add marker">
       <div>
-        <span>Name: </span><paper-input id="newMarkerName" value="name of marker"></paper-input>
+        <span>Name: </span><paper-input value="{{newMarkerName}}"></paper-input>
       </div>
       <div>
-        <span>Time: </span><paper-input value="current Time"></paper-input>
+        <span>Info:</span><paper-input value="{{newMarkerInfo}}"></paper-input>
+      </div>
+      <div>
+        <span>Time: </span><paper-input value="{{newMarkerTime}}"></paper-input>
       </div>
       <div style="display: flex">
         <div style="flex: 1"></div>
-        <paper-button affirmative default class="closeOnPress" id="pbOK" on-click={{editOK}}>OK</paper-button>
+        <paper-button class="closeOnPress"
+          on-click={{addMarkerCancel}} >Cancel</paper-button>
+        <paper-button class="closeOnPress"
+          on-click={{addMarkerOK}}>OK</paper-button>
       </div>
     </paper-dialog>
 

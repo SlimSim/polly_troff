@@ -48,6 +48,10 @@ Polymer("onoff-value", {
   addValue: function(){
     this.onValue = parseInt(this.onValue) + 1;
   },
+  valueChanged: function(){
+//    this.fire(this.dbQuery+'ValueChanged'); // farför gjorde jag detta? det ska räcka med nedanstående...
+    this.fire('valueChanged', this.value);
+  },
   onValueChanged: function(){
     if(this.isOn){
       this.value = parseInt(this.onValue);

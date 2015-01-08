@@ -23,6 +23,8 @@ function recallAllPolymers(){
   document.querySelector('#pauseBetweenLoops').recall();
 
   document.querySelector('#playButton').icon = "av:play-arrow";
+
+  console.log("recallAllPolymers")
 }
 function setSongMetadata(media){
   document.getElementById('markerList').setSongMetadata(media);
@@ -32,7 +34,8 @@ function setSongMetadata(media){
   mediaPlayer.playbackRate = speed/100;
   mediaPlayer.volume = volume/100;
 
-
+  console.log("setSongMetadata, media:");
+  console.log(media);
 }
 
 function errorPrintFactory(custom) {
