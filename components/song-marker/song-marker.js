@@ -63,6 +63,7 @@ Polymer("song-marker", {
     this.fire('setStart', {currentMarker: this});
   },
   setStop: function(){
+    console.log("setStop ->")
     this.fire('setStop', {currentMarker: this});
   },
   startChanged: function(){

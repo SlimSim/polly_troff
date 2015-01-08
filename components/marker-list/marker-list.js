@@ -18,6 +18,7 @@ Polymer("marker-list", {
     var that = this;
     window.addEventListener('resize', function(){
       that.recalculateDistanse();
+      that.setAppropriateActivePlayRegion();
     });
 
 
@@ -77,32 +78,6 @@ Polymer("marker-list", {
     });
   },
   recallMarkers: function(){
-
-/*
-    if(!gCurrentSongPath)
-      return;
-    var thisOnOffValue = this;
-
-    var key1 = gCurrentSongPath + 'onoffValue' + this.dbQuery + "onValue";
-    chrome.storage.local.get(key1, function(res){
-      var tmpOnValue;
-      if(typeof res[key1] !== 'undefined')
-        tmpOnValue = res[key1]
-      else
-        tmpOnValue = thisOnOffValue.defaultOnValue
-      thisOnOffValue.onValue = tmpOnValue;
-    });
-
-    var key2 = gCurrentSongPath + 'onoffValue' + this.dbQuery + "isOn";
-    chrome.storage.local.get(key2, function(res){
-      var tmpIsOn;
-      if(typeof res[key2] !== 'undefined')
-        tmpIsOn = res[key2]
-      else
-        tmpIsOn = thisOnOffValue.defaultIsOn
-      thisOnOffValue.isOn =  tmpIsOn;
-    });
-*/
     if(!gCurrentSongPath)
       return;
     var that = this;
@@ -114,8 +89,8 @@ Polymer("marker-list", {
         var markerStopTime = res2[key2];
         var key = gCurrentSongPath +'markers';
         chrome.storage.local.get(key, function(res){
-          console.log("get markers ->")
-          if(!res[key]){ // generate the first two markers.
+          if(!res[key] || JSON.parse(res[key]).length <= 0){
+            // generate the first two markers.
             that.newMarkerName = "Start";
             that.newMarkerInfo = "This is a automaticaly generated marker "+
                                  "to indicate the start of the song";
@@ -135,6 +110,7 @@ Polymer("marker-list", {
           }
           // add the saved markers:
           var markers = JSON.parse(res[key]);
+          console.log("markerStopTime = " + markerStopTime)
           for(var i=0; i<markers.length; i++){
             var marker = markers[i];
             var newMarker = document.createElement('song-marker');
@@ -142,12 +118,16 @@ Polymer("marker-list", {
             newMarker.info = marker.info;
             newMarker.time = marker.time;
             that.appendChild(newMarker);
-          //select the start and stop markers.
+            //select the start and stop markers.
             if(Math.abs(marker.time - markerStartTime) < 0.01 )
-              newMarker.setStart();
+              newMarker.start = true;
+            console.log("marker.time = " + marker.time)
             if(Math.abs(marker.time - markerStopTime) < 0.01)
-              newMarker.setStop();
+              newMarker.stop = true;
+
           }
+          that.markerStartTime = markerStartTime;
+          that.markerStopTime = markerStopTime;
         });
       });
 
@@ -219,7 +199,7 @@ this.shadowRoot.querySelector('#newMarkerName').shadowRoot.querySelector('input'
 
 
 
-    this.saveAllMarkers();
+
 
     console.log("addMarkerOK <-");
     return newMarker;
@@ -259,11 +239,18 @@ console.log("saving markers to storage, get ->");
   },
   markerAttached: function(fireObject){
     this.recalculateDistanse();
-
+    this.saveAllMarkers();
   },
   markerDetached: function(fireObject){
+    // checking if start or stop marker is removed
+    if(fireObject.detail.currentMarker.start)
+      this.selectFirstMarkerAsStart();
+    if(fireObject.detail.currentMarker.stop){
+      this.selectLastMarkerAsStop();
+    }
     fireObject.detail.currentMarker.remove()
     this.recalculateDistanse();
+    this.saveAllMarkers()
   },
   markerEdited: function(fireObject){
     console.log("markerEdited -> this:")
@@ -485,6 +472,13 @@ console.log("saving markers to storage, get ->");
     this.$.activePlayRegion.style.height = height;
     this.$.activePlayRegion.style.marginTop = top + "px";
 
+  },
+  selectFirstMarkerAsStart: function(){
+    this.querySelector('song-marker').setStart();
+  },
+  selectLastMarkerAsStop: function(){
+    var aSongMarker = this.querySelectorAll('song-marker');
+    aSongMarker[aSongMarker.length-1].setStop();
   },
   startBeforeChanged: function(){
     this.startTime = Math.max(this.markerStartTime - this.startBefore, 0);
