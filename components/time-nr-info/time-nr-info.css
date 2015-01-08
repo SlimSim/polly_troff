@@ -1,0 +1,9 @@
+:host{
+  position: absolute;
+  bottom: -7vh;
+  right: 0;
+  font-size: 50vh;
+  display: flex;
+  flex-direction: column;
+  z-index: {{zValue}};
+}

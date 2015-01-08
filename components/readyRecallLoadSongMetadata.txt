@@ -1,0 +1,16 @@
+An explanation of the functions that will be called.
+All these functions sould exist in all of my components (atleast the big ones)
+
+ready:
+  standard Polymer thing
+  gets called when the polymer/page is loaded (sort of like document load)
+
+recall:
+this method should clear the state of the polymer from the old song,
+as well as, when possible, load the saved values for the next song.
+
+
+
+setSongMetadata:
+this method should load the data that can not be displayed untill the
+song metadata is accessable, such as the song-duration, and the markers...
