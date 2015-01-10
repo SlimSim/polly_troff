@@ -5,5 +5,18 @@
   font-size: 50vh;
   display: flex;
   flex-direction: column;
+  text-align: right;
   z-index: {{zValue}};
+}
+
+.play{
+  color: green;
+}
+
+.wait{
+  color: yellow;
+}
+
+.pause{
+  color: red;
 }

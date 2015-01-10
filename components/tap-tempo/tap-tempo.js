@@ -4,9 +4,6 @@ Polymer("tap-tempo", {
   time: 0,
   startTime: 0,
   tempo: "?",
-  ready: function(){
-    var taptempo = this;
-  },
   recall: function(){
     if(!gCurrentSongPath)
       return;
@@ -19,9 +16,6 @@ Polymer("tap-tempo", {
   tempoTapped: function(){
     this.previousTime = this.time;
     this.time = new Date().getTime() / 1000;
-
-//  document.getElementById('blur-hack').focus();
-
     if(this.time - this.previousTime > 3){
         this.startTime = this.previousTime = this.time;
         this.nrTapps = 0;

@@ -30,6 +30,7 @@ found in the LICENSE file. -->
       <link rel="import" href="components/time-area/time-area.html">
       <link rel="import" href="components/v-slider-value/v-slider-value.html">
       <link rel="import" href="components/time-nr-info/time-nr-info.html">
+      <link rel="import" href="components/troff-dialogs/troff-dialogs.html">
 
 
       <!-- icons -->
@@ -39,6 +40,7 @@ found in the LICENSE file. -->
       <link rel="import" href="/bower_components/core-icons/social-icons.html">
       <link rel="import" href="/bower_components/core-icons/communication-icons.html">
       <link rel="import" href="/bower_components/core-icons/av-icons.html">
+      <link rel="import" href="/bower_components/core-icons/hardware-icons.html">
 
 
       <link rel="stylesheet" href="styles.css">
@@ -72,23 +74,26 @@ found in the LICENSE file. -->
 <br />
 <core-icon-button icon="menu"></core-icon-button>
 -->
-          <div class="flexRow">
-            <paper-icon-button icon="help"></paper-icon-button>
-            <paper-icon-button icon="social:share"></paper-icon-button>
-            <paper-icon-button icon="communication:import-export"></paper-icon-button>
+
+          <div class="flexRow centerRow">
+            <paper-icon-button icon="help" id="infoButton"></paper-icon-button>
+            <paper-icon-button icon="hardware:keyboard" id="keyboardShortcutButton"></paper-icon-button>
+            <paper-icon-button icon="social:share" id="shareAppButton"></paper-icon-button>
+            <paper-icon-button icon="communication:import-export" id="shareMarkersButton"></paper-icon-button>
+            <div flex></div>
+            <time-area id="timeArea" ></time-area>
           </div>
-          <time-area id="timeArea"></time-area>
 
           <onoff-value id="pauseBefStart" value=3 isOn="true" label="pause before start" dbQuery="pauseBefStart"><core-icon icon="av:av-timer"></core-icon>before start </onoff-value>
 
           <h1>Marker</h1>
-          <paper-button>play full song</paper-button>
+          <paper-button id="playFullSong">play full song</paper-button>
           <onoff-value id="startBefore" isOn="true" value=4 dbQuery="startBefore">start before</onoff-value>
           <onoff-value id="stopAfter" isOn="true" value=2 dbQuery="stopAfter">stop after</onoff-value>
 
           <h1>Loop</h1>
-          <num-pad id="numpad" special="&infin;"></num-pad>
-          <onoff-value id="pauseBetweenLoops" value=2 offValue=1 dbQuery="pauseBetweenLoops"><core-icon icon="av:av-timer"></core-icon> between loops</onoff-value>
+          <num-pad special="&infin;"></num-pad>
+          <onoff-value id="pauseBetweenLoops" value=2 offValue=0 dbQuery="pauseBetweenLoops"><core-icon icon="av:av-timer"></core-icon> between loops</onoff-value>
 
           <div class="flexRow" style="justify-content: space-around">
             <v-slider-value id="volumeVal" name="Volume" min=0 max=100 value=75 amount=3 updateQuery="volume" ></v-slider-value>
@@ -111,7 +116,7 @@ found in the LICENSE file. -->
           </marker-list>
 
 
-          <time-nr-info time=3 nr=4></time-and-number-info>
+          <time-nr-info time=3 loopTimesLeft=4></time-and-number-info>
 
 
 
@@ -180,6 +185,8 @@ found in the LICENSE file. -->
         </div>
 
       </double-drawer-panel>
+
+      <troff-dialogs></troff-dialogs>
 
 
 

@@ -48,6 +48,10 @@
   flex-direction: row;
 }
 
+.centerRow{
+  align-items: center;
+}
+
 .iconPaperButton{
   height: 32px;
   display: flex;

@@ -13,7 +13,7 @@ var gCurrentSongPath = "";
 
 function recallAllPolymers(){
   document.getElementById('markerList').recall();
-  document.getElementById('numpad').recall();
+  document.querySelector('num-pad').recall();
   document.getElementById('taptempo').recall();
   document.getElementById('speedVal').recall();
   document.getElementById('volumeVal').recall();
@@ -23,8 +23,6 @@ function recallAllPolymers(){
   document.querySelector('#pauseBetweenLoops').recall();
 
   document.querySelector('#playButton').icon = "av:play-arrow";
-
-  console.log("recallAllPolymers")
 }
 function setSongMetadata(media){
   document.getElementById('markerList').setSongMetadata(media);
@@ -33,9 +31,6 @@ function setSongMetadata(media){
   var mediaPlayer = document.querySelector('audio, video');
   mediaPlayer.playbackRate = speed/100;
   mediaPlayer.volume = volume/100;
-
-  console.log("setSongMetadata, media:");
-  console.log(media);
 }
 
 function errorPrintFactory(custom) {
@@ -63,7 +58,7 @@ function errorPrintFactory(custom) {
             break;
       };
 
-      console.log(custom + ': ' + msg);
+      console.error(custom + ': ' + msg);
    };
 }
 
@@ -126,6 +121,8 @@ function clearList() {
 }
 
 function setSong(fullPath, galleryId){
+  Troff.pauseSong();
+
   var fsId = galleryId;
   var fs = null;
 
@@ -138,13 +135,16 @@ function setSong(fullPath, galleryId){
     }
   }
   if (fs) {
-
-
-
       var path = fullPath;
 
       gCurrentSongPath = path;
       recallAllPolymers();
+
+      var key = "gCurrentSongPath";
+      var obj = {};
+      obj[key] = gCurrentSongPath;
+      chrome.storage.local.set(obj);
+
       fs.root.getFile(path, {create: false}, function(fileEntry) {
          var newElem = null;
          // show the file data
@@ -160,27 +160,30 @@ function setSong(fullPath, galleryId){
          if (newElem) {
             // Supported in Chrome M37 and later.
             if (!chrome.mediaGalleries.getMetadata) {
+              console.info("I'm in the if, so no metadata...")
               newElem.setAttribute('src', fileEntry.toURL());
             } else {
+              console.info("I'm in the else, which means the song-metadata is avaleble, I think???")
               fileEntry.file(function(file) {
-                 chrome.mediaGalleries.getMetadata(file, {}, function(metadata) {
-                    if (metadata.attachedImages.length) {
-                       var blob = metadata.attachedImages[0];
-                       var posterBlobURL = URL.createObjectURL(blob);
-                       newElem.setAttribute('poster', posterBlobURL);
-                    }
-                    newElem.setAttribute('src', fileEntry.toURL());
-                 });
-              });
+                chrome.mediaGalleries.getMetadata(file, {}, function(metadata) {
+                  if (metadata.attachedImages.length) {
+                    var blob = metadata.attachedImages[0];
+                    var posterBlobURL = URL.createObjectURL(blob);
+                    newElem.setAttribute('poster', posterBlobURL);
+                  } //end if
+                  newElem.setAttribute('src', fileEntry.toURL());
+                }); // end chrome.mediaGalleries.getMetadata-function
+              });//end fileEntry.file-function
             }
-         }
+         }//end if(newElem)
       });
    }
 
 
 }
-
+/*
 function updateSelection(e) { // site Gammal
+console.log("updateSelection -> is this used??? why the comment above...")
    var selList = document.getElementById("GalleryList");
    var indx = selList.selectedIndex;
    var fsId = selList.options[indx].getAttribute("data-fsid");
@@ -229,7 +232,7 @@ function updateSelection(e) { // site Gammal
       });
    }
 }
-
+*/
 function addGallery(name, id) {
    var optGrp = document.createElement("h3");
    optGrp.appendChild(document.createTextNode(name))
@@ -240,21 +243,31 @@ function addGallery(name, id) {
 
 function addItem(itemEntry) {
 
-//  var opt = document.createElement("option");
-   if (itemEntry.isFile) {
-//      opt.setAttribute("data-fullpath", itemEntry.fullPath);
-
-      var mData = chrome.mediaGalleries.getMediaFileSystemMetadata(itemEntry.filesystem);
-
+  if (itemEntry.isFile) {
+    itemEntry.getMetadata(function(metadata){
+      if(metadata.title || metadata.titel || metadata.artist){
+        console.info("Haleluja! The metadata is accessable from here!!!!")
+        console.info('artist = ' + metadata.artist);
+        console.info('title = ' + metadata.title);
+      }
+    })
+    var mData = chrome.mediaGalleries.getMediaFileSystemMetadata(itemEntry.filesystem);
 
     var pap = document.createElement("select-button");
     pap.setAttribute("style", "width: 100%");
     pap.appendChild(document.createTextNode(itemEntry.name))
     pap.setAttribute("data-fullpath", itemEntry.fullPath );
     pap.setAttribute("data-fsid", mData.galleryId );
-    pap.addEventListener('click', function(){
+    pap.addEventListener('click', function(a, b, c){
+      var songs = document.querySelectorAll('select-button')
+      for(var i=0; i<songs.length; i++){
+        songs[i].selected = false;
+      }
+      this.selected = true;
       setSong(itemEntry.fullPath, mData.galleryId)
     });
+    if(itemEntry.fullPath == gCurrentSongPath)
+      pap.click();
 
     document.getElementById("gallery2").appendChild(pap);
 
@@ -267,15 +280,6 @@ function addItem(itemEntry) {
 
     document.getElementById("gallery2").appendChild(group);
    }
-//   var pap1 = document.createElement("paper-button");
-//   pap1.appendChild(document.createTextNode(itemEntry.name));
-//   opt.appendChild(pap1);
-/*
-  var list = document.getElementById('list');
-   console.log("itemEntry:")
-   console.log(itemEntry)
-   gCurOptGrp.appendChild(opt);
-*/
 }
 
 function scanGallery(entries) {
@@ -326,31 +330,31 @@ function scanGalleries(fs) {
 }
 
 function getGalleriesInfo(results) {
-   clearContentDiv();
-   clearList();
-   if (results.length) {
-      var str = 'Gallery count: ' + results.length + ' ( ';
-      results.forEach(function(item, indx, arr) {
-         var mData = chrome.mediaGalleries.getMediaFileSystemMetadata(item);
+  clearContentDiv();
+  clearList();
+  if (results.length) {
+    var str = 'Gallery count: ' + results.length + ' ( ';
+    results.forEach(function(item, indx, arr) {
+       var mData = chrome.mediaGalleries.getMediaFileSystemMetadata(item);
 
-         if (mData) {
-            str += mData.name;
-            if (indx < arr.length-1)
-               str += ",";
-            str += " ";
-         }
-      });
-      str += ')';
-//      document.getElementById("status").innerText = str;
-      gGalleryArray = results; // store the list of gallery directories
-      gGalleryIndex = 0;
+       if (mData) {
+          str += mData.name;
+          if (indx < arr.length-1)
+             str += ",";
+          str += " ";
+       }
+    });
+    str += ')';
+  //      document.getElementById("status").innerText = str;
+    gGalleryArray = results; // store the list of gallery directories
+    gGalleryIndex = 0;
 
-//      document.getElementById("read-button").disabled = "";
-   }
-   else {
-//      document.getElementById("status").innerText = 'No galleries found';
-//      document.getElementById("read-button").disabled = "disabled";
-   }
+  //      document.getElementById("read-button").disabled = "";
+  }
+  else {
+  //      document.getElementById("status").innerText = 'No galleries found';
+  //      document.getElementById("read-button").disabled = "disabled";
+  }
   if (gGalleryArray.length > 0) {
     scanGalleries(gGalleryArray[0]);
   }
@@ -358,98 +362,29 @@ function getGalleriesInfo(results) {
 }
 
 window.addEventListener("load", function() {
-   // __MGA__bRestart is set in the launcher code to indicate that the app was
-   // restarted instead of being normally launched
+  chrome.mediaGalleries.getMediaFileSystems({
+     interactive : 'if_needed'
+  }, getGalleriesInfo);
 
-
-//   if (window.__MGA__bRestart) {
-//      console.log("App was restarted");
-
-      // if the app was restarted, get the media gallery information
-      chrome.mediaGalleries.getMediaFileSystems({
-         interactive : 'if_needed'
-      }, getGalleriesInfo);
-
-//   }
-  /*
-   document.getElementById('gallery-button').addEventListener("click", function() {
-      chrome.mediaGalleries.getMediaFileSystems({
-         interactive : 'if_needed'
-      }, getGalleriesInfo);
-   });
-   */
-   document.getElementById('configure-button').addEventListener("click", function() {
-      chrome.mediaGalleries.getMediaFileSystems({
-         interactive : 'yes'
-      }, getGalleriesInfo);
-   });
-
-   /*
-   document.getElementById('add-folder-button').addEventListener("click", function() {
-     chrome.mediaGalleries.addUserSelectedFolder(getGalleriesInfo);
-   });
-   */
-   /*
-   document.getElementById('read-button').addEventListener("click", function () {
-      clearContentDiv();
-      clearList();
-      if (gGalleryArray.length > 0) {
-         scanGalleries(gGalleryArray[0]);
-      }
-   });
-   */
-//   document.getElementById('GalleryList').addEventListener("change", function(e) {
-//      updateSelection(e);
-//   });
-
-    /*
-   var scan_button = document.getElementById('scan-button');
-   scan_button.addEventListener("click", function () {
-     if (scan_button.innerHTML == 'Cancel Scan') {
-       chrome.mediaGalleries.cancelMediaScan();
-     } else {
-       scan_button.innerHTML = 'Cancel Scan';
-       chrome.mediaGalleries.startMediaScan();
-     }
-   });
-   */
-    /*
-   document.getElementById('add-scan-results-button').addEventListener("click", function () {
-     chrome.mediaGalleries.addScanResults(getGalleriesInfo);
-   });
-   */
+  document.getElementById('configure-button').addEventListener("click", function() {
+    chrome.mediaGalleries.getMediaFileSystems({
+      interactive : 'yes'
+    }, getGalleriesInfo);
+  });
+  var key = "gCurrentSongPath";
+  chrome.storage.local.get(key, function(res){
+    gCurrentSongPath = res[key] || "";
+  });
 
   document.onkeydown = function(e) {
 //    console.log("onkeydown " + e.keyCode);
-    if(e.keyCode == 84)
+    if(e.keyCode == 84) // T
       document.getElementById('taptempo').tempoTapped();
     if(48 <= e.keyCode && e.keyCode <= 57 ){
       var val = e.keyCode-48;
-      document.getElementById('numpad').value = val;
+      document.querySelector('num-pad').setValue(val);
     }
 
   };
 
 }); // end window load
-
-chrome.mediaGalleries.onScanProgress.addListener(function(details) {
-  if (details.type == 'finish') {
-/*
-    document.getElementById('status').innerText =
-        'Scan found ' + details.galleryCount + ' galleries';
-*/
-  } else {
-/*
-    document.getElementById('status').innerText = 'Scanning: ' + details.type;
-*/
-  }
-  if (details.type != 'start'){
-  /*
-   document.getElementById('scan-button').innerHTML = 'Search for Galleries';
-  */
-  }
-});
-
-
-
-

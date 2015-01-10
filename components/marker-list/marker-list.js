@@ -22,31 +22,14 @@ Polymer("marker-list", {
     });
 
 
-  console.log("marker-list ready -> this:")
-  console.log(this);
-
-
-/* The Add Marker - dialoug */
-//    var thisMarkerList = this;
+    /* Adding declarative close-functionality to buttons in dialougs: */
     var pbok = this.shadowRoot.querySelectorAll('.closeOnPress');
     for(var i=0; i<pbok.length; i++){
+      /* The Add Marker - dialoug */
       pbok[i].addEventListener('click',function(){
-
-
+        //this is an EXTREMLY ugly way to close the parend dialog!!!!
         this.parentNode.parentNode.toggle();
-
-/*
-        var markerTerty = document.createElement('song-marker');
-        markerTerty.name = "terty";
-        markerTerty.time = 30;
-        markerTerty.textContent = "super";
-        var markerAT = document.createElement('song-marker');
-        markerAT.name = "AT fyra"
-        markerAT.time = 84
-*/
-
-//        shadowRoot.querySelector('#addMarkerDialog').;
-      })
+      });
     }
 
 
@@ -54,9 +37,14 @@ Polymer("marker-list", {
   recall: function(){
     this.value = 0;
     this.max = 42;
-//    this.markerStartTime = 0;
-//    this.markerStopTime = 42;
     this.clearMarkers();
+
+    /*
+    här borde jag sätta den lila stapeln (vad heter den föresten???) till
+    100% höjd (inte av sjärmen, men så att det ser bra ut)
+    så att den inte ser konstig ut i laddningen...
+     - men det verkar svårt dock...
+    */
 
   },
   setSongMetadata: function(media){

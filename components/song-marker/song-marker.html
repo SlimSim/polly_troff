@@ -10,6 +10,8 @@
 <link rel="import" href="/bower_components/core-icons/social-icons.html">
 <link rel="import" href="/bower_components/core-icons/communication-icons.html">
 <link rel="import" href="/bower_components/core-icons/av-icons.html">
+<link rel="import" href="/bower_components/core-icons/image-icons.html">
+
 
 
 <link rel="import" href="../button/select-button.html">
@@ -24,12 +26,11 @@
   <template>
     <LINK REL="StyleSheet" HREF="song-marker.css" TYPE="text/css" >
     <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
-
-    <paper-button on-click={{edit}} class="smalPaperButt">E</paper-button>
+    <paper-icon-button on-click={{showInfo}} icon="info-outline"></paper-icon-button>
+    <paper-icon-button on-click={{edit}} icon="image:edit">E</paper-icon-button>
     {{visualTime}}
     <select-button id="startButt" class="extraRoom" on-click={{setStart}} >{{name}}</select-button>
     <select-button id="stopButt"  on-click={{setStop}}>stop</select-button>
-    <paper-icon-button icon="info"></paper-icon-button>
     <content></content>
 
 
@@ -42,18 +43,42 @@
       <div>
         <span>Name: </span><paper-input value={{name}}></paper-input>
       </div>
-      <div>
-        <span>Info: </span><paper-input value={{info}}></paper-input>
+      <div> <!-- add "multiline" atribute to info paper input? -->
+        <span>Info: </span>
+        <paper-input value={{info}}></paper-input>
       </div>
       <div>
         <span>Time: </span><paper-input value={{visualTime}}></paper-input>
       </div>
       <div>
-        <span>Remove: </span><paper-button class="closeOnPress" id="pbR"  on-click={{removeMe}}>Remove</paper-button>
+        <span>Remove: </span><paper-button class="closeOnPress" id="pbR"  on-click={{removeMeCheck}}>Remove</paper-button>
       </div>
       <div style="display: flex">
         <div style="flex: 1"></div>
         <paper-button affirmative default class="closeOnPress" id="pbOK" on-click={{editOK}}>OK</paper-button>
+        <paper-button affirmative default class="closeOnPress" id="pbOK">Cancel</paper-button>
+      </div>
+    </paper-dialog>
+
+    <paper-dialog id="removeMeCheckDialog" heading="Remove marker">
+      <div>
+        Are you sure you want to remove the "{{name}}" marker?
+      </div>
+      <div style="display: flex">
+        <div style="flex: 1"></div>
+        <paper-button class="closeOnPress" on-click={{removeMe}}>Yes</paper-button>
+        <paper-button class="closeOnPress">no</paper-button>
+      </div>
+
+    </paper-dialog>
+
+    <paper-dialog id="infoDialog" heading={{name}}>
+      <div>
+        {{info}}
+      </div>
+      <div style="display: flex">
+        <div style="flex: 1"></div>
+        <paper-button class="closeOnPress">OK</paper-button>
       </div>
     </paper-dialog>
 

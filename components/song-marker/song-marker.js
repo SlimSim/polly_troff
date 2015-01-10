@@ -21,6 +21,9 @@ Polymer("song-marker", {
     this.fire("markerAttached", {currentMarker: this});
     this.visualTime = this.secToDisp(this.time);
   },
+  removeMeCheck: function(){
+    this.$.removeMeCheckDialog.toggle();
+  },
   removeMe: function(){ // används denna ??? SITE SITE SITE SITE SITE SITE SITE SITE SITE
     this.fire("markerDetached", {currentMarker: this});
   },
@@ -40,14 +43,18 @@ Polymer("song-marker", {
       return min + ":" + sec
     }
   },
+  showInfo: function(){
+    this.$.infoDialog.toggle();
+  },
   edit: function(){
     this.$.editDialog.toggle();
   },
   editOK: function(){
-    console.log("edit OK ->");
-    console.log(this);
     this.time = this.visualTimeToSec(this.visualTime);
     this.fire("markerEdited", {currentMarker: this});
+  },
+  editCancel: function(){
+
   },
   visualTimeToSec: function(visualTime){
     var aTime = visualTime.split(":");
@@ -63,7 +70,6 @@ Polymer("song-marker", {
     this.fire('setStart', {currentMarker: this});
   },
   setStop: function(){
-    console.log("setStop ->")
     this.fire('setStop', {currentMarker: this});
   },
   startChanged: function(){

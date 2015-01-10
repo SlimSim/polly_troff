@@ -13,7 +13,11 @@ Polymer("num-pad", {
     });
   },
   select: function(a, b, c){
-    this.value = c.getAttribute('value');
+    this.setValue(c.getAttribute('value'));
+  },
+  setValue: function(val){
+    this.value = val;
+    this.fire('valueChanged');
   },
   valueChanged: function(){
     var aPaperButtons = this.shadowRoot.querySelectorAll('select-button')
@@ -23,6 +27,8 @@ Polymer("num-pad", {
         aPaperButtons[i].setAttribute('selected', true);
       }
     }
+
+    this.fire('valueChanged')
 
     if(!gCurrentSongPath)
       return;

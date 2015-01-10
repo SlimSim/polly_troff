@@ -1,8 +1,8 @@
 {
-  "manifest_version": 2,
-  "name": "Troff_restart",
-  "description": "",
-  "version": "0.0.1",
+  "name": "Troff - Training with music",
+  "short_name": "Troff",
+  "description": "Training with music - A Music player that let you loop a part of a song, slow it down and create markers on the song timeline.",
+  "version": "0.4.1",
   "minimum_chrome_version": "23",
   "permissions": [
 	    {"mediaGalleries": ["read", "allAutoDetected"]},
@@ -18,5 +18,7 @@
     "background": {
       "scripts": ["background.js"]
     }
-  }
+  },
+  "manifest_version": 2,
+  "offline_enabled": true
 }

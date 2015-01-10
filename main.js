@@ -32,7 +32,29 @@ Troff.playSong = function(wait){
 
 }
 
+Troff.openHelp = function(){
+  console.log("open Help ->")
+  document.querySelector('troff-dialogs').openHelp();
+}
+
+Troff.openKeyboardShortcuts = function(){
+  document.querySelector('troff-dialogs').openKeyboardShortcuts()
+}
+Troff.openShareApp = function(){
+  document.querySelector('troff-dialogs').openShareApp();
+}
+Troff.openShareMarkers = function(){
+  document.querySelector('troff-dialogs').openShareMarkers();
+}
+
 Troff.pauseSong = function(){
+  Troff.setMode('pause');
+//    Troff.updateLoopTimes();
+
+  if(Troff.stopTimeout)  clearInterval(Troff.stopTimeout);
+  if(Troff.stopInterval) clearInterval(Troff.stopInterval);
+
+
   var media = document.querySelector('audio, video');
   if(!media) return;
 
@@ -41,17 +63,11 @@ Troff.pauseSong = function(){
 //      Troff.exitFullscreen();
 //  }
 
-    Troff.setMode('pause');
-//    Troff.updateLoopTimes();
-
-    if(Troff.stopTimeout)  clearInterval(Troff.stopTimeout);
-    if(Troff.stopInterval) clearInterval(Troff.stopInterval);
-
-
-
 }
 
 Troff.spacePlay = function(){
+  console.log(6)
+
   console.log("spacePlay ->")
   var media = document.querySelector('audio, video');
   if(!media) return;
@@ -82,6 +98,27 @@ Troff.spacePlay = function(){
     this.icon = "av:play-arrow";
   }
   */
+}
+
+Troff.playFullSong = function(){
+  var ml = document.getElementById('markerList');
+  ml.selectFirstMarkerAsStart();
+  ml.selectLastMarkerAsStop();
+
+}
+
+
+
+Troff.addMarker = function(){
+  var ml = document.getElementById('markerList');
+  ml.addMarkerDialoge();
+}
+
+Troff.setLoopTimes = function(){
+  console.log(document.querySelector('num-pad').value);
+  console.log(document.querySelector('time-nr-info').nr)
+  document.querySelector('time-nr-info').loopTimesLeft = document.querySelector('num-pad').value
+
 }
 
 Troff.setMode = function(mode){
@@ -127,138 +164,54 @@ Troff.setMode = function(mode){
 
 }
 
+
+
 window.onload = function(){
-  document.querySelector('#startBefore').addEventListener('valueChanged',function(fireInfo){
-    document.querySelector('marker-list').startBefore = fireInfo.detail;
-    console.log("value changed of start before to " + fireInfo.detail);
-  });
-  document.querySelector('#stopAfter').addEventListener('valueChanged',function(fireInfo){
-    document.querySelector('marker-list').stopAfter = fireInfo.detail;
-  });
-  document.querySelector('marker-list').addEventListener('atEndOfLoop', function(){
-/*
-        Troff.goToStartMarker();
-    var audio = $(FS.currentPlayer)[0];
-    var dTime = audio.currentTime;
-    audio.pause ();
-    if($('#buttPlayInFullscreen').hasClass('active'))
-        Troff.exitFullscreen();
-
-/ *    if( Troff.isLoopInfinite() ) {
-        Troff.playSong( $('#waitBetweenLoops').val()*1000 );
-    } else if ( Troff.isLoopOn() ) {
-        if ( IO.loopTimesLeft()>1 ){
-        IO.loopTimesLeft( -1 );
-        Troff.playSong( $('#waitBetweenLoops').val()*1000 );
-        } else {
-        IO.loopTimesLeft( $('#loopTimes').val() );
-        Troff.pauseSong();
-        }
-    } // end if/else
-* /
-
-// gamla versionen:
-    if( Troff.isLoopOn() ){
-        if(Troff.isLoopInfinite() ) {
-        Troff.playSong( $('#waitBetweenLoops').val()*1000 );
-        } else {
-        if ( IO.loopTimesLeft()>1 ){
-            IO.loopTimesLeft( -1 );
-            Troff.playSong( $('#waitBetweenLoops').val()*1000 );
-        } else {
-            IO.loopTimesLeft( $('#loopTimes').val() );
-            Troff.pauseSong();
-        }
-        } // end else
-    } else {
-        Troff.pauseSong(); //This is needed because it setts the mood to 'pause'
-    }
-*/
-    console.log("atEndOfLoop ->")
-  var markerList = document.querySelector('marker-list');
-  var timeNrInfo = document.querySelector('time-nr-info');
-  var media = document.querySelector('audio, video');
-  var numPad = document.querySelector('num-pad');
-  var pauseBetweenLoops = document.querySelector('#pauseBetweenLoops')
-
-    console.log(markerList)
-    console.log(timeNrInfo)
-    console.log(media)
-    console.log(numPad)
-
-  media.currentTime = markerList.startTime;
-  media.pause();
-
-  if ( timeNrInfo.loopTimesLeft > 1 ){
-      timeNrInfo.loopTimesLeft -= 1;
-      Troff.playSong( pauseBetweenLoops.value * 1000 );
-  } else {
-      timeNrInfo.loopTimesLeft = numpad.value;
-      Troff.pauseSong();
+  function addEventListenerTo(query, listenFor, funk){
+    document.querySelector(query).addEventListener(listenFor, funk);
   }
 
+  addEventListenerTo('#addMarkerButt', 'click', Troff.addMarker)
+  addEventListenerTo('#playButton', 'click', Troff.spacePlay)
+  addEventListenerTo('#playFullSong', 'click', Troff.playFullSong)
+  addEventListenerTo('#infoButton', 'click', Troff.openHelp)
+  addEventListenerTo('num-pad', 'valueChanged', Troff.setLoopTimes)
+  addEventListenerTo('#keyboardShortcutButton', 'click', Troff.openKeyboardShortcuts)
+  addEventListenerTo('#shareAppButton', 'click', Troff.openShareApp)
+  addEventListenerTo('#shareMarkersButton', 'click', Troff.openShareMarkers)
 
-
-
+  addEventListenerTo('#pauseBefStart', 'valueChanged', function(fireInfo){
+    document.querySelector('time-nr-info').time = fireInfo.detail;
+  });
+  addEventListenerTo('#startBefore', 'valueChanged', function(fireInfo){
+    document.querySelector('marker-list').startBefore = fireInfo.detail;
+  });
+  addEventListenerTo('#stopAfter', 'valueChanged', function(fireInfo){
+    document.querySelector('marker-list').stopAfter = fireInfo.detail;
   });
 
-/*
-  document.getElementById('mButton').addEventListener('click', function(){
-
-    var ml = document.getElementById('markerList');
-
-    var mTime = document.querySelector('#mTime').value;
-    var name = document.querySelector('#mName').value;
-
-    var marker = document.createElement('song-marker');
-    marker.name = name;
-    marker.time = mTime;
-
-    console.log(marker)
-
-    ml.appendChild(marker);
-
-  })
-*/
-  document.querySelector('#addMarkerButt').addEventListener('click', function(){
-    var ml = document.getElementById('markerList');
-    ml.addMarkerDialoge();
-  })
-  document.querySelector('#playButton').addEventListener('click', Troff.spacePlay)
-/*  document.querySelector('#speedVal').addEventListener('valueChanged', function(){
+  addEventListenerTo('marker-list', 'atEndOfLoop', function(){
+    var markerList = document.querySelector('marker-list');
+    var timeNrInfo = document.querySelector('time-nr-info');
     var media = document.querySelector('audio, video');
-    if(!media) return;
+    var numPad = document.querySelector('num-pad');
+    var pauseBetweenLoops = document.querySelector('#pauseBetweenLoops')
 
-//    console.log("this:")
-//    console.log(this)
+    media.currentTime = markerList.startTime;
+    media.pause();
 
-//    media.playbackRate =
-  })
-*/
-
-
-  setTimeout(function(){
-    var ml = document.getElementById('markerList');
-
-/*
-    var markerTerty = document.createElement('song-marker');
-    markerTerty.name = "terty";
-    markerTerty.time = 30;
-    markerTerty.textContent = "super";
-    var markerAT = document.createElement('song-marker');
-    markerAT.name = "AT fyra"
-    markerAT.time = 84
+    //loopTimesLeft == 0 indicates infinet loop is on
+    if( timeNrInfo.loopTimesLeft == 0 ){
+        Troff.playSong( pauseBetweenLoops.value * 1000 );
+    } else if( timeNrInfo.loopTimesLeft > 1 ){
+        timeNrInfo.loopTimesLeft -= 1;
+        Troff.playSong( pauseBetweenLoops.value * 1000 );
+    } else {
+        timeNrInfo.loopTimesLeft = numPad.value;
+        Troff.pauseSong();
+    }
+  }); // atEndOfLoop End
 
 
 
-    //console.clear();
-
-    ml.appendChild(markerTerty);
-    ml.appendChild(markerAT);
-*/
-  }, 1000);
-
-
-
-
-}
+} // window.onload end

@@ -5,8 +5,10 @@
 <polymer-element name="time-nr-info" attributes="time loopTimesLeft mode zValue">
   <template>
     <LINK REL="StyleSheet" HREF="time-nr-info.css" TYPE="text/css" >
+    <div class="{{mode}}">
       <div>{{time}}</div>
-      <div>{{loopTimesLeft}}</div>
+      <div>{{visualLoopTimesLeft}}</div>
+    </div>
   </template>
 
   <script src="time-nr-info.js"></script>
