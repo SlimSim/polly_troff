@@ -1,0 +1,62 @@
+
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/core-localstorage/core-localstorage.html">
+
+<polymer-element name="troff-dialogs" attributes="">
+  <template>
+    <LINK REL="StyleSheet" HREF="troff-dialogs.css" TYPE="text/css" >
+    <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
+
+    <paper-dialog id="helpDialog" heading="What is Troff and how to use it?">
+
+      <ul>
+        <li>Use space or enter, as primary button.</li>
+        <li>Select the name of a marker and "Stop" of another marker to only play a part of the song.</li>
+        <li>Use Loop "&infin;" (or 0) to loop that part of a song,<br />
+          press a number in the Loop square to loop that that many times (or use the numbers on the keyboard) .</li>
+        <li>Use "pause bef start" (or P) to control how long the countdown is before music starts to play.<br />
+        use "wait" to control countdown between loops</li>
+        <li>Use "start before" or "stop after" (B and A) to start play the music before or after a marker.</li>
+        <li>Use 'Shift/Alt'+ P/B/A to increase or decrease their respective value</li>
+        <li>Every square is a button; try to press them and see what happens!</li>
+        <li>Press "Volume:" (or V) to set volume to 100%.<br />
+        Press "Speed:" (or S) to set speed to 100%.</li>
+        <li>Use 'Shift/Alt'+ V/S to increase or decrease Volume/Speed</li>
+        <li>Use 'Shift/Alt'+ U to select the start-marker or stop-marker respectively</li>
+        <li>Songs and markers are automatically saved next time you enter Troff.</li>
+        <li>
+            You can export your markers to let other people use your markers and comments. Simply press "I/E" and then "Export Markers".
+            You will then get a text-string that represents the markers for the current song
+            - copy this text-string and give it to the persons that needs the markers.
+        </li>
+        <li>
+            You can also import markers from some one else's Troff. Press "I/E" and then "Import Markers".
+            Paste the exact string you've received and all the markers will be added to the current song.
+        </li>
+      </ul>
+      <p>For more info, visit: <a href="https://www.facebook.com/troffmusic" target="_blank">facebook.com/troffmusic</a></p>
+
+
+    </paper-dialog>
+
+
+    <paper-dialog id="keyboardShortcuts" heading="Keyboard Shortcuts">
+      key-shortcuts, they are the boomb!
+    </paper-dialog>
+
+    <paper-dialog id="shareApp" heading="Share this App!">
+      dela appen
+    </paper-dialog>
+
+    <paper-dialog id="shareMarkers" heading="Share the markers for this song">
+      dela markörerna
+    </paper-dialog>
+
+
+
+  </template>
+
+  <script src="troff-dialogs.js"></script>
+
+</polymer-element>
