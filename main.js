@@ -7,7 +7,6 @@ toastGroupTemplate.showToast = function() {
 var Troff = {};
 
 Troff.playSong = function(wait){
-  console.log("playSong wiat = " + wait)
   wait = wait || 0;
   var media = document.querySelector('audio, video');
   if (!media) return;
@@ -19,11 +18,7 @@ Troff.playSong = function(wait){
 
 
   Troff.stopTimeout = setTimeout(function(){
-    console.log("timeOut function...");
     if(document.querySelector('time-nr-info').mode == 'pause' ) return;
-//    if($('#buttPlayInFullscreen').hasClass('active')){
-//      Troff.goFullscreen();
-//    }
     media.play();
     Troff.setMode('play');
   }, wait);
@@ -33,7 +28,6 @@ Troff.playSong = function(wait){
 }
 
 Troff.openHelp = function(){
-  console.log("open Help ->")
   document.querySelector('troff-dialogs').openHelp();
 }
 
@@ -59,18 +53,15 @@ Troff.pauseSong = function(){
   if(!media) return;
 
   media.pause();
-//  if($('#buttPlayInFullscreen').hasClass('active')){
-//      Troff.exitFullscreen();
-//  }
+
 
 }
 
 Troff.spacePlay = function(){
-  console.log(6)
-
-  console.log("spacePlay ->")
   var media = document.querySelector('audio, video');
   if(!media) return;
+
+
 
   media.currentTime = document.querySelector('marker-list').startTime;
 
@@ -79,10 +70,8 @@ Troff.spacePlay = function(){
 
 
   if( document.querySelector('time-nr-info').mode == 'pause'){
-    console.log("mode is pause, start to play song soon!")
     Troff.playSong( timeToStart*1000 );
   } else {
-    console.log("mode is not pause!")
     Troff.pauseSong();
   }
 
@@ -115,14 +104,18 @@ Troff.addMarker = function(){
 }
 
 Troff.setLoopTimes = function(){
-  console.log(document.querySelector('num-pad').value);
-  console.log(document.querySelector('time-nr-info').nr)
-  document.querySelector('time-nr-info').loopTimesLeft = document.querySelector('num-pad').value
-
+  document.querySelector('time-nr-info').loopTimesLeft =
+    document.querySelector('num-pad').value
 }
 
 Troff.setMode = function(mode){
   if(mode == 'pause'){
+    var fullscreen = document.querySelector('#playInFullscreenButt');
+    if(fullscreen){
+      document.querySelector('#videoBox').classList.remove('fullscreen');
+      document.querySelector('marker-list').style.visibility = 'visible';
+      document.querySelector('time-nr-info').style.visibility = 'visible';
+    }
     document.querySelector('time-nr-info').mode = 'pause';
     document.querySelector('time-nr-info').zValue = 0;
 /*
@@ -138,8 +131,14 @@ Troff.setMode = function(mode){
     document.querySelector('#playButton').icon = "av:play-arrow";
 // "av:play-arrow / av:pause";
 
-  }
-  if(mode == 'wait'){
+  } else if(mode == 'wait'){
+    var fullscreen = document.querySelector('#playInFullscreenButt');
+    if(fullscreen && fullscreen.selected){
+      document.querySelector('#videoBox').classList.add('fullscreen');
+      document.querySelector('marker-list').style.visibility = 'hidden';
+      document.querySelector('time-nr-info').style.visibility = 'visible';
+    }
+
     document.querySelector('time-nr-info').mode = 'wait'
     document.querySelector('time-nr-info').zValue = 3;
     document.querySelector('#playButton').icon = "av:pause";
@@ -151,8 +150,14 @@ Troff.setMode = function(mode){
     $('#buttSpacePlay').css('display', 'none');
     $('#buttSpacePause').css('display', 'block');
   */
-  }
-  if(mode == 'play'){
+  } else if(mode == 'play'){
+
+    var fullscreen = document.querySelector('#playInFullscreenButt');
+    if(fullscreen && fullscreen.selected){
+      document.querySelector('#videoBox').classList.add('fullscreen');
+      document.querySelector('marker-list').style.visibility = 'hidden';
+      document.querySelector('time-nr-info').style.visibility = 'hidden';
+    }
     document.querySelector('time-nr-info').mode = 'play';
     document.querySelector('time-nr-info').zValue = 3;
     document.querySelector('#playButton').icon = "av:pause";

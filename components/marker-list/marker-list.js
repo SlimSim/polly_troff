@@ -98,7 +98,6 @@ Polymer("marker-list", {
           }
           // add the saved markers:
           var markers = JSON.parse(res[key]);
-          console.log("markerStopTime = " + markerStopTime)
           for(var i=0; i<markers.length; i++){
             var marker = markers[i];
             var newMarker = document.createElement('song-marker');
@@ -109,7 +108,6 @@ Polymer("marker-list", {
             //select the start and stop markers.
             if(Math.abs(marker.time - markerStartTime) < 0.01 )
               newMarker.start = true;
-            console.log("marker.time = " + marker.time)
             if(Math.abs(marker.time - markerStopTime) < 0.01)
               newMarker.stop = true;
 
@@ -122,7 +120,6 @@ Polymer("marker-list", {
     })
   },
   addMarkerDialoge: function(){
-    console.log("addMArkerDialoge ->")
 
     this.newMarkerTime = this.value;
 //    this.shadowRoot.querySelector("#newMarkerTime").value = this.value;
@@ -157,25 +154,19 @@ this.shadowRoot.querySelector('#newMarkerName').shadowRoot.querySelector('input'
     //this.shadowRoot.querySelector('#newMarkerName').focus();
 
 
-    console.log("addMarkerDialoge <-")
 
   },
   addMarkerOK: function(){
-  console.log("AMOK");
 
     var newMarker = document.createElement('song-marker');
     newMarker.name = this.newMarkerName;
     newMarker.info = this.newMarkerInfo;
     newMarker.time = this.newMarkerTime;
 
-    console.log("newMarker:")
-    console.log(newMarker)
-
     var markers = this.querySelectorAll('song-marker'); //JSON.parse(res[key]);
 
     var inserted = false;
     for(var i=0; i<markers.length; i++){
-      console.log(markers[i].time)
       if(newMarker.time < markers[i].time){
         this.insertBefore(newMarker, markers[i]);
         inserted = true;
@@ -189,16 +180,11 @@ this.shadowRoot.querySelector('#newMarkerName').shadowRoot.querySelector('input'
 
 
 
-    console.log("addMarkerOK <-");
     return newMarker;
   },
   saveAllMarkers: function(){
-    console.log("saveAllMarkers ->")
     markers = this.querySelectorAll('song-marker');
     var key = gCurrentSongPath +'markers';
-
-console.log("saving markers to storage, get ->");
-
     var reducedMarkers = []
 
     for(var i=0; i<markers.length; i++){
@@ -208,7 +194,6 @@ console.log("saving markers to storage, get ->");
       o.time = markers[i].time;
       reducedMarkers.push(o)
     }
-    console.log(reducedMarkers)
 
     var obj = {};
     obj[key] = JSON.stringify(reducedMarkers);
@@ -216,7 +201,7 @@ console.log("saving markers to storage, get ->");
 
   },
   addMarkerCancel: function(){
-    console.log("addMarkerCancel ->")
+
   },
   clearMarkers: function(){
     while(this.childNodes[0])
@@ -241,8 +226,6 @@ console.log("saving markers to storage, get ->");
     this.saveAllMarkers()
   },
   markerEdited: function(fireObject){
-    console.log("markerEdited -> this:")
-    console.log(this);
     if(fireObject.detail.currentMarker.time > this.max)
       fireObject.detail.currentMarker.time = this.max;
     if(fireObject.detail.currentMarker.time < 0)
@@ -268,7 +251,6 @@ console.log("saving markers to storage, get ->");
     document.querySelector('#timeArea').currentTime = this.value;
   },
   setStart: function(fireObject){
-    console.log("setStart -> ")
     var aMarker = this.querySelectorAll('song-marker');
     for(i=0; i<aMarker.length; i++){
       if(aMarker[i]==fireObject.detail.currentMarker){
@@ -280,7 +262,6 @@ console.log("saving markers to storage, get ->");
     this.markerStartTime = fireObject.detail.currentMarker.time;
   },
   setStop: function(fireObject){
-    console.log("setStop ->")
     var aMarker = this.querySelectorAll('song-marker');
     for(i=0; i<aMarker.length; i++){
       if(aMarker[i]==fireObject.detail.currentMarker){
@@ -360,7 +341,7 @@ console.log("saving markers to storage, get ->");
 //    this.setAppropriateActivePlayRegion();
   },
   recalculateDistanseGam: function(input){ /// gam  - avnänds denna ??? SITE SITE SITE SITE SITE SITE SITE SITE SITE
-    console.log('recalculateDistanseGam ->');
+    console.info('recalculateDistanseGam ->');
 
 
 
@@ -481,7 +462,6 @@ console.log("saving markers to storage, get ->");
     var obj = {};
     obj[key] = this.markerStartTime;
     chrome.storage.local.set(obj);
-    console.log("markerStopTime = " + this.markerStartTime)
   },
   markerStopTimeChanged: function(){
     this.stopAfterChanged();
@@ -490,7 +470,6 @@ console.log("saving markers to storage, get ->");
     var key = gCurrentSongPath + 'markerStopTime';
     var obj = {};
     obj[key] = this.markerStopTime;
-    console.log("markerStopTime = " + this.markerStopTime)
     chrome.storage.local.set(obj);
   },
   startTimeChanged: function(){

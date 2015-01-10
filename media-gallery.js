@@ -89,12 +89,20 @@ function addAudioToContentDiv() {
 
 function addVideoToContentDiv() {
    var content_div = document.getElementById('content');
+   var videoBox = document.createElement('div');
    var video = document.createElement('video');
+   var fsButton = document.createElement('toggle-button');
+   fsButton.appendChild(document.createTextNode('Play in Fullscreen') );
+   fsButton.setAttribute('id', "playInFullscreenButt")
+   videoBox.setAttribute('id', "videoBox");
+
    video.addEventListener('loadedmetadata', function(e){
      setSongMetadata(video);
    })
 
-   content_div.appendChild(video);
+   content_div.appendChild(fsButton);
+   videoBox.appendChild(video);
+   content_div.appendChild(videoBox);
    return video;
 }
 
