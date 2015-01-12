@@ -57,6 +57,10 @@ Troff.pauseSong = function(){
 
 }
 
+Troff.enterPlay = function(){
+  console.log("enterPlay ->")
+}
+
 Troff.spacePlay = function(){
   var media = document.querySelector('audio, video');
   if(!media) return;
@@ -93,7 +97,6 @@ Troff.playFullSong = function(){
   var ml = document.getElementById('markerList');
   ml.selectFirstMarkerAsStart();
   ml.selectLastMarkerAsStop();
-
 }
 
 
@@ -106,6 +109,38 @@ Troff.addMarker = function(){
 Troff.setLoopTimes = function(){
   document.querySelector('time-nr-info').loopTimesLeft =
     document.querySelector('num-pad').value
+}
+
+Troff.playInFullscreenRecall = function(){
+  console.log("playInFullscreenRecall")
+  if(!gCurrentSongPath)
+    return;
+  console.log("playInFullscreenRecall")
+  if(!document.querySelector('#playInFullscreenButt'))
+    return;
+  console.log("playInFullscreenRecall")
+
+  var key = gCurrentSongPath + 'playInFullscreen';
+  var thisTaptempo = this;
+  chrome.storage.local.get(key, function(res){
+    console.log("got fullscreen thing, res[key]:")
+    console.log(res[key])
+    document.querySelector('#playInFullscreenButt').selected = res[key];
+  });
+
+}
+
+Troff.playInFullscreenChanged = function(){
+  console.log("playInFullscreenChanged ->")
+  if(!gCurrentSongPath)
+    return;
+  if(!document.querySelector('#playInFullscreenButt'))
+    return;
+  console.log("playInFullscreenChanged ->")
+  var key = gCurrentSongPath + 'playInFullscreen';
+  var obj = {};
+  obj[key] = document.querySelector('#playInFullscreenButt').selected;
+  chrome.storage.local.set(obj);
 }
 
 Troff.setMode = function(mode){
@@ -184,6 +219,7 @@ window.onload = function(){
   addEventListenerTo('#keyboardShortcutButton', 'click', Troff.openKeyboardShortcuts)
   addEventListenerTo('#shareAppButton', 'click', Troff.openShareApp)
   addEventListenerTo('#shareMarkersButton', 'click', Troff.openShareMarkers)
+
 
   addEventListenerTo('#pauseBefStart', 'valueChanged', function(fireInfo){
     document.querySelector('time-nr-info').time = fireInfo.detail;

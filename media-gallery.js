@@ -80,6 +80,7 @@ function addImageToContentDiv() {
 function addAudioToContentDiv() {
    var content_div = document.getElementById('content');
    var audio = document.createElement('audio');
+
    audio.addEventListener('loadedmetadata', function(e){
      setSongMetadata(audio);
    })
@@ -92,16 +93,20 @@ function addVideoToContentDiv() {
    var videoBox = document.createElement('div');
    var video = document.createElement('video');
    var fsButton = document.createElement('toggle-button');
+
+   fsButton.addEventListener('click', Troff.playInFullscreenChanged);
+
    fsButton.appendChild(document.createTextNode('Play in Fullscreen') );
    fsButton.setAttribute('id', "playInFullscreenButt")
    videoBox.setAttribute('id', "videoBox");
 
    video.addEventListener('loadedmetadata', function(e){
      setSongMetadata(video);
+    Troff.playInFullscreenRecall();
    })
 
    content_div.appendChild(fsButton);
-   videoBox.appendChild(video);
+  videoBox.appendChild(video);
    content_div.appendChild(videoBox);
    return video;
 }
@@ -383,16 +388,5 @@ window.addEventListener("load", function() {
   chrome.storage.local.get(key, function(res){
     gCurrentSongPath = res[key] || "";
   });
-
-  document.onkeydown = function(e) {
-//    console.log("onkeydown " + e.keyCode);
-    if(e.keyCode == 84) // T
-      document.getElementById('taptempo').tempoTapped();
-    if(48 <= e.keyCode && e.keyCode <= 57 ){
-      var val = e.keyCode-48;
-      document.querySelector('num-pad').setValue(val);
-    }
-
-  };
 
 }); // end window load
