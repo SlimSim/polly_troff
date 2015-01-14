@@ -73,6 +73,9 @@ function GalleryData(id) {
 function addImageToContentDiv() {
    var content_div = document.getElementById('content');
    var image = document.createElement('img');
+   image.style["max-width"] = "100%";
+   image.style["max-height"] = "200px";
+
    content_div.appendChild(image);
    return image;
 }
@@ -267,7 +270,7 @@ function addItem(itemEntry) {
     var mData = chrome.mediaGalleries.getMediaFileSystemMetadata(itemEntry.filesystem);
 
     var pap = document.createElement("select-button");
-    pap.setAttribute("style", "width: 100%");
+    pap.setAttribute("class", "mediaButton");
     pap.appendChild(document.createTextNode(itemEntry.name))
     pap.setAttribute("data-fullpath", itemEntry.fullPath );
     pap.setAttribute("data-fsid", mData.galleryId );

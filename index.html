@@ -118,55 +118,39 @@ found in the LICENSE file. -->
 
 
         </section>
-        <section class="ddrawer-right background1 offColor">
+        <section class="ddrawer-right background1 offColor flexColumn">
+          <div>
+            <paper-button id="configure-button" >Select folders</paper-button>
+            <tap-tempo id="taptempo" tempo="?"></tap-tempo>
+  <!--
+            <button id="gallery-button" style="display:none">Get Galleries Info</button>
+            <button id="add-folder-button" style="display:none">Add a Gallery...</button>
+            <button id="read-button" disabled="false" style="display:none">Read Galleries</button>
+            <button id="scan-button" style="display:none">Search for Galleries</button>
+            <button id="add-scan-results-button" style="display:none">Add Scan Results</button>
+            <p id="info" style="flex; display:none"><span id="status">&nbsp;</span></p>
+            <div id="list" style="display: none">
+              <select id="GalleryList" size="10" style="display: flex; width: 100%"></select>
+            </div>
+  -->
+          </div>
 
-
-
-
-              <paper-button id="configure-button" >Select folders</paper-button>
-<!--              <paper-button id="configure-button" >Tempo:</paper-button>
-              <p>240</p>
-              -->
-              <tap-tempo id="taptempo" tempo="?"></tap-tempo>
-              <button id="gallery-button" style="display:none">Get Galleries Info</button>
-              <button id="add-folder-button" style="display:none">Add a Gallery...</button>
-              <button id="read-button" disabled="false" style="display:none">Read Galleries</button>
-              <button id="scan-button" style="display:none">Search for Galleries</button>
-              <button id="add-scan-results-button" style="display:none">Add Scan Results</button>
-
-              <p id="info" style="flex; display:none">
-                  <span id="status">&nbsp;</span>
-              </p>
-              <div id="list" style="display: none">
-                <select id="GalleryList" size="10" style="display: flex; width: 100%"></select>
-              </div>
-              <div id="container">
-                <div id="content"></div>
-              </div>
-              <div style="overflow:auto;">
-                <div flex id="gallery2">
-                </div>
-              </div>
-
-
-
-
-
-
-
-
-
+          <div id="container">
+            <div id="content"></div>
+          </div>
+          <div flex id="gallery2">
+          </div>
         </section>
 
 
 
-        <div id="bottomMenueLeft" class="bottom left flexRow bottomMenue">
+        <div id="bottomMenueLeft" class="bottom left flexRow bottomMenue infront">
           <paper-icon-button class="leftMenueToggle infront" icon="more-vert" style="margin-right: -6px;"></paper-icon-button>
           <paper-button id="addMarkerButt" class="importantColor iconPaperButton" style="margin-left: 15px"><core-icon icon="add"></core-icon>Add marker</paper-button>
           <paper-fab id="playButton" class="importantColor" icon="av:play-arrow" mini></paper-fab>
         </div>
-        <div id="bottomMenueRight" class="bottom right flexRow bottomMenue">
-          <paper-icon-button class="rightMenueToggle infront" icon="menu"></paper-icon-button>
+        <div id="bottomMenueRight" class="bottom right flexRow bottomMenue infront">
+          <paper-icon-button class="rightMenueToggle" icon="menu"></paper-icon-button>
         </div>
 
       </double-drawer-panel>

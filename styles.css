@@ -106,31 +106,15 @@ h1 {
 /* width: 74%; */
 /* min-width: 50%; */
 /* min-height: 50%; */
-overflow-y: auto;
+/* overflow-y: auto; */
 /* border: 1px solid #aaa; */
 /* border-radius: 5px; */
 display: inline-block;
 /* background-color: #777; */
 }
 
-#list {
-  display: flex;
-/*  height: 100%; */
-/* width: 25%; */
-/* border: 1px solid #aaa; */
-/* border-radius: 5px; */
-/* display: inline-block; */
-/* vertical-align: top; */
-/* background-color: #777; */
-}
-
-#info {
-	border: 1px solid #aaa;
-/*	background-color: #777; */
-	width: auto;
-	border-radius: 5px;
-	overflow: hidden;
-	padding: 5px;
+.mediaButton{
+  width: 97%;
 }
 
 option{
@@ -155,10 +139,7 @@ video{
 }
 
 #gallery2{
-
-}
-#gallery2 paper-button{
-  width: 95%;
+  overflow-y: auto;
 }
 
 

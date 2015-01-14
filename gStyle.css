@@ -48,6 +48,11 @@
   flex-direction: row;
 }
 
+.flexColumn{
+  display: flex;
+  flex-direction: column;
+}
+
 .centerRow{
   align-items: center;
 }
