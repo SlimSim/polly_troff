@@ -1,0 +1,25 @@
+
+.fullWidth{
+  width: 100%;
+}
+
+
+.letter{
+  color: red;
+  width: 50px;
+  display: inline;
+}
+
+.info{
+  color: blue;
+  display: flex;
+}
+
+span{
+
+}
+
+div{
+  display: flex;
+  flex-direction: row;
+}
