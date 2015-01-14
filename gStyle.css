@@ -57,6 +57,10 @@
   display: flex;
 }
 
+.infront{
+  z-index: 42;
+}
+
 .fullscreen{
   width: 100vw;
   height: 100vh;

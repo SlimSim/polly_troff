@@ -1,12 +1,25 @@
 :host{
-  position: absolute;
-  bottom: -7vh;
-  right: 0;
-  font-size: 50vh;
   display: flex;
   flex-direction: column;
-  text-align: right;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-size: 50vh;
+  visibility: visible;
+  height: 90vh;
+  height: calc(100vh - 50px);
   z-index: {{zValue}};
+}
+
+.flexParent{
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.flexChildren{
+  display: flex;
+  align-items: center;
 }
 
 .play{

@@ -27,5 +27,3 @@ Polymer("time-nr-info", {
       this.visualLoopTimesLeft = this.loopTimesLeft;
   }
 });
-
-

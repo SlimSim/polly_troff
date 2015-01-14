@@ -156,17 +156,18 @@ this.shadowRoot.querySelector('#newMarkerName').shadowRoot.querySelector('input'
 
 
   },
-  addMarkerOK: function(){
-
-    var newMarker = document.createElement('song-marker');
-    newMarker.name = this.newMarkerName;
-    newMarker.info = this.newMarkerInfo;
-    newMarker.time = this.newMarkerTime;
-
+  insertMarker: function(newMarker){
     var markers = this.querySelectorAll('song-marker'); //JSON.parse(res[key]);
 
     var inserted = false;
     for(var i=0; i<markers.length; i++){
+      if(Math.abs(newMarker.time - markers[i].time) < 0.1 ){
+        console.log("markörerna e för nära varandra")
+        markers[i].name += " " + newMarker.name;
+        markers[i].info += " " + newMarker.info;
+        this.saveAllMarkers()
+        return;
+      }
       if(newMarker.time < markers[i].time){
         this.insertBefore(newMarker, markers[i]);
         inserted = true;
@@ -176,16 +177,19 @@ this.shadowRoot.querySelector('#newMarkerName').shadowRoot.querySelector('input'
     if(!inserted)
       this.appendChild(newMarker);
 
+  },
+  addMarkerOK: function(){
+    var newMarker = document.createElement('song-marker');
+    newMarker.name = this.newMarkerName;
+    newMarker.info = this.newMarkerInfo;
+    newMarker.time = this.newMarkerTime;
 
-
-
-
+    this.insertMarker(newMarker);
     return newMarker;
   },
-  saveAllMarkers: function(){
+  toString: function(){
     markers = this.querySelectorAll('song-marker');
-    var key = gCurrentSongPath +'markers';
-    var reducedMarkers = []
+    var reducedMarkers = [];
 
     for(var i=0; i<markers.length; i++){
       var o = {};
@@ -195,8 +199,15 @@ this.shadowRoot.querySelector('#newMarkerName').shadowRoot.querySelector('input'
       reducedMarkers.push(o)
     }
 
+    return JSON.stringify(reducedMarkers);
+
+  },
+  saveAllMarkers: function(){
+    var key = gCurrentSongPath +'markers';
+    var strReducedMarkers = this.toString();
+
     var obj = {};
-    obj[key] = JSON.stringify(reducedMarkers);
+    obj[key] = strReducedMarkers;
     chrome.storage.local.set(obj);
 
   },

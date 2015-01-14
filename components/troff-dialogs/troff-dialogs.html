@@ -9,6 +9,8 @@
     <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
 
     <paper-dialog id="helpDialog" heading="What is Troff and how to use it?">
+      <LINK REL="StyleSheet" HREF="troff-dialogs.css" TYPE="text/css" >
+      <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
 
       <ul>
         <li>Use space or enter, as primary button.</li>
@@ -42,15 +44,61 @@
 
 
     <paper-dialog id="keyboardShortcuts" heading="Keyboard Shortcuts">
+      <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
+      <LINK REL="StyleSheet" HREF="troff-dialogs.css" TYPE="text/css" >
+<div><span class="letter">a</span> <span class="info">toggle stop After</span></div>
+<div><span class="letter">b</span> <span class="info">toggle start Before</span></div>
+<div><span class="letter">m</span> <span class="info">add marker</span></div>
+<div><span class="letter">p</span> <span class="info">toggle pause before start</span></div>
+<div><span class="letter">w</span> <span class="info">toggle wait between loop</span></div>
+<div><span class="letter">1-9</span> <span class="info">set amount of loops</span></div>
+<div><span class="letter">0</span> <span class="info">set continous loop</span></div>
+<div><span class="letter">v</span> <span class="info">set volume to 75%</span></div>
+<div><span class="letter">s</span> <span class="info">set speed to 100%</span></div>
+<div><span class="letter">u</span> <span class="info">play song from start to end marker</span></div>
+<div><span class="letter">f</span> <span class="info">play video in fullscreen</span></div>
+<div><span class="letter">space</span> <span class="info">Play song from marker and go to startmarker</span></div>
+<div><span class="letter">enter</span> <span class="info">Play/pause song from current place</span></div>
+<div><span class="letter">T</span> <span class="info">tapp repeatedly to calculate the tempo of a song</span></div>
+<div><span class="letter">esc </span> <span class="info">stop song</span></div>
+
       key-shortcuts, they are the boomb!
+
     </paper-dialog>
 
     <paper-dialog id="shareApp" heading="Share this App!">
-      dela appen
+      <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
+      <LINK REL="StyleSheet" HREF="troff-dialogs.css" TYPE="text/css" >
+      <p>
+        Please feel free to share this app!
+        Simply give your freinds this url and they are good to go!
+      </p>
+      <input type="text" class="fullWidth" id="urlInput"
+      value="https://chrome.google.com/webstore/detail/troff-training-with-music/mebbbmcjdgoipnkpmfjndbolgdnakppl" />
     </paper-dialog>
 
+
     <paper-dialog id="shareMarkers" heading="Share the markers for this song">
-      dela markörerna
+      <LINK REL="StyleSheet" HREF="troff-dialogs.css" TYPE="text/css" >
+      <LINK REL="StyleSheet" HREF="../../gStyle.css" TYPE="text/css" >
+
+      <h3>Import Markers:</h3>
+      <p>
+        Paste your markers here and click import. Note,
+        if a marker is pasted to close to an existing marker,
+        there info will be merged instead of two overlapping markers
+      </p>
+      <paper-input id="importMarkersInput" value={{importedMarkers}}></paper-input>
+      <paper-button on-click={{importMarkers}} class="closeOnPress">Import</paper-button>
+
+      <h3>Export Markers:</h3>
+      <p>
+        To export this songs markers, copy this string,
+        and give it to people to let them import your markers.
+      </p>
+      <paper-input value={{markersToExport}}></paper-input>
+      <paper-button class="closeOnPress">OK</paper-button>
+
     </paper-dialog>
 
 
